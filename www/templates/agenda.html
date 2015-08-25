@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="starter">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+	<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+
+	<title>Agenda</title>
+
+	<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+	<script src="cordova.js"></script>
+
+	<script src="js/app.js"></script>
+</head>
+
+<body>
+
+	<ion-side-menus>
+
+	<ion-side-menu side="right">
+</ion-side-menu>
+
+<ion-side-menu-content>
+
+<!-- Main content, usually <ion-nav-view> -->
+<ion-nav-bar>
+<ion-nav-buttons side="right">
+<!-- Toggle right side menu -->
+<button menu-toggle="right" class="button button-icon icon ion-navicon"></button>
+</ion-nav-buttons>
+</ion-nav-bar>
+<div class="padding" style="padding-top: 80px;">
+	<div class="list">
+
+		<div class="item item-input-inset">
+			<label class="item-input-wrapper">
+				<i class="icon ion-search placeholder-icon"></i>
+				<input type="text" placeholder="Buscar">
+			</label>
+			<button class="button button-small">
+				Cancelar
+			</button>
+		</div>
+
+	</div>
+	<button class="button button-full button-royal">
+  ENCONTRAR AMIGOS
+</button>
+</div>	
+
+</ion-side-menu-content>
+
+<!-- Right menu -->
+<ion-side-menu side="right">
+</ion-side-menu>
+</ion-side-menus>
+</body>
+
+</html>

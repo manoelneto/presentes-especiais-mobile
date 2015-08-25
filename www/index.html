@@ -1,44 +1,47 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
+<html ng-app="starter">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title></title>
 
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+  <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
 
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
 
-    <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
+  <script src="cordova.js"></script>
 
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
+  <script src="js/app.js"></script>
+</head>
 
-    <!-- your app's js -->
-    <script src="js/app.js"></script>
-  </head>
-  <ion-tabs class="tabs-icon-top">
-  <ion-tab ui-sref="index">
-  <body ng-app="starter">
-    <ion-header-bar class= "bar-dark" > 
-    <h1 class= "title" > Presentes Especiais </h1> 
-    </ion-header-bar> 
-    <ion-content class="text-center" style="background:#CD5C5C">
-    <br>
-    <img src="img/logo.png">
-    <div class="list list-inset" style="background:#CD5C5C">
-    <label class= "item item-input" style="background:#CD5C5C"><i class="ion-android-mail"></i><input style="margin-left:2px" type= "email" placeholder="E-mail" ></label>
-    <label class= "item item-input" style="background:#CD5C5C"> <i class= "ion-locked"> </i> <input style="margin-left:2px" type= "password" placeholder="Senha" > </label>
-    <button on-touch="onTouch()" class="button button-full button-positive" ng-click="Logar()" ng-controller="Login">
-      Entrar
-    </button>
+<body>
+  <ion-nav-view></ion-nav-view>
+
+  <ion-view view-title="Sign-In">
+  <ion-content class="text-center" >
+    <div class="padding">
+      <img src="img/logo.png">
     </div>
-    </ion-content>
-  </body>
-    </ion-tab>
-  </ion-tabs>
+
+      <div class="list list-inset" >
+        <label class= "item item-input" ><i class="ion-android-mail"></i><input style="margin-left:2px" type= "email" placeholder="E-mail" ng-model="user.email"></label>
+        <label class= "item item-input" > <i class= "ion-locked"> </i> <input style="margin-left:2px"
+         type= "password" placeholder="Senha" ng-model="user.password"> </label>
+          <div class="padding">
+            <button class="button button-block button-calm" ng-click="signIn(user)">
+                    Entrar
+            </button>
+
+            <p class="text-center">
+              <a href="#/forgot-password">Esqueceu a senha?</a>
+            </p>
+            <p class="text-center">
+              <a href="#/create-account" ng-click="createAccount()">Cadastre-se</a>
+            </p>
+          </div>
+      </div>
+  </ion-content>
+  </ion-view>
+</body>
 </html>
