@@ -1,4 +1,13 @@
 {
   "name": "Presentes_Especiais",
-  "app_id": ""
+  "app_id": "",
+  "gulpStartupTasks": [
+    "compass",
+    "coffee",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
 }

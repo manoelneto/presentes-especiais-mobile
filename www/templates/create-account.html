@@ -1,44 +1,29 @@
-<html ng-app="starter">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width"> 
-
-	<title>Ionic Modal</title>
-
-	<link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
-	<script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
-</head>
-<body ng-controller="AppCtrl">
-
 <ion-content class="text-center">
-<div class="padding">
-      <img src="img/logo.png">
-    </div>
-<div class="list">
-
-<div class="padding">
-	<label class= "item item-input" ><i class="ion-person"></i><input style="padding:10px" type= "text" placeholder="Nome" ng-model="user.firstname">
-	</label>
-	<label class= "item item-input" ><i class="ion-name"></i><input style="margin-left:2px" type= "text" placeholder="Sobrenome" ng-model="user.lastname">
-	</label>
-
-	<label class= "item item-input" ><i class="ion-android-mail"></i><input style="margin-		left:2px" type= "email" placeholder="E-mail" ng-model="user.email">
-	</label>
-
-	<label class= "item item-input" > <i class= "ion-locked"> </i>
-		<input style="margin-left:2px" type= "password" placeholder="Senha" ng-model="user.password">
-	</label>
-
-</div>
 	<div class="padding">
-	<button class="button button-large button-calm" ng-click="createContact(newUser)">CRIAR CONTA</button>
+	      <img src="img/logo.png">
+	    </div>
+	<div class="list">
+
+	<div class="padding">
+		<label class= "item item-input" ><i class="ion-person"></i><input style="padding:10px" type= "text" placeholder="Nome" ng-model="user.firstname">
+		</label>
+		<label class= "item item-input" ><i class="ion-name"></i><input style="margin-left:2px" type= "text" placeholder="Sobrenome" ng-model="user.lastname">
+		</label>
+
+		<label class= "item item-input" ><i class="ion-android-mail"></i><input style="margin-		left:2px" type= "email" placeholder="E-mail" ng-model="user.email">
+		</label>
+
+		<label class= "item item-input" > <i class= "ion-locked"> </i>
+			<input style="margin-left:2px" type= "password" placeholder="Senha" ng-model="user.password">
+		</label>
+
 	</div>
-	<div class="padding">
-              <i class="ion-person"></i><a class="item item-thumbnail" href="#/create-account" ng-click="createAccount()">Entrar com facebook</a>
-    </div>	
+		<div class="padding">
+		<button class="button button-large button-calm" ng-click="createContact(newUser)">CRIAR CONTA</button>
+		</div>
+		<div class="padding">
+	              <i class="ion-person"></i><a class="item item-thumbnail" href="#/create-account" data-ng-click="createAccount()">Entrar com facebook</a>
+	    </div>	
 
-</div>
+	</div>
 </ion-content>
-
-</body>
-</html>

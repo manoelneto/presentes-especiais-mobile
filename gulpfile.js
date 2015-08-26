@@ -2,33 +2,49 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var bower = require('bower');
 var concat = require('gulp-concat');
-var sass = require('gulp-sass');
+var coffee = require('gulp-coffee');
+var compass = require('gulp-compass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 
 var paths = {
-  sass: ['./scss/**/*.scss']
+  compass: ['./scss/**/*.scss'],
+  coffee: ['./www/coffee/**/*.coffee'],
 };
 
-gulp.task('default', ['sass']);
+gulp.task('default', ['compass']);
 
-gulp.task('sass', function(done) {
-  gulp.src('./scss/ionic.app.scss')
-    .pipe(sass({
-      errLogToConsole: true
+gulp.task('compass', function(done) {
+  gulp.src('./www/scss/ionic.app.scss')
+    .pipe(compass({
+      config_file: 'config.rb',
+      image: 'www/img',
+      generated_images_path: '/img',
+      // sass: 'scss',
+      relative: false,
     }))
-    .pipe(gulp.dest('./www/css/'))
-    .pipe(minifyCss({
-      keepSpecialComments: 0
-    }))
-    .pipe(rename({ extname: '.min.css' }))
-    .pipe(gulp.dest('./www/css/'))
+    // .pipe(gulp.dest('./www/css/'))
+    // .pipe(minifyCss({
+    //   keepSpecialComments: 0
+    // }))
+    // .pipe(rename({ extname: '.min.css' }))
+    // .pipe(gulp.dest('./www/css/'))
     .on('end', done);
 });
 
+gulp.task('coffee', function(done) {
+  gulp.src(paths.coffee)
+    .pipe(coffee({bare: true})
+    .on('error', gutil.log.bind(gutil, 'Coffee Error')))
+    // .pipe(concat('application.js'))
+    .pipe(gulp.dest('./www/js'))
+    .on('end', done)
+});
+
 gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['sass']);
+  gulp.watch(paths.compass, ['compass']);
+  gulp.watch(paths.coffee, ['coffee']);
 });
 
 gulp.task('install', ['git-check'], function() {
