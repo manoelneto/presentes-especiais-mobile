@@ -29,24 +29,16 @@ angular.module('starter', ['ionic', 'ui.router']).run(function($ionicPlatform) {
 }).config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state('index', {
     url: '',
-    templateUrl: 'index.html',
+    templateUrl: 'templates/login.html',
     controller: 'SignInCtrl'
   });
-  $stateProvider.state('list-view', {
-    url: '/index',
-    templateUrl: 'templates/list-view.html'
+  $stateProvider.state('registration_new', {
+    url: '/registration/new',
+    templateUrl: 'templates/registration_new.html'
   });
-  $stateProvider.state('new-account', {
-    url: '/new-account',
-    templateUrl: 'templates/create-account.html'
-  });
-  $stateProvider.state('agenda', {
-    url: '/agenda',
-    templateUrl: 'templates/agenda.html'
-  });
-  $stateProvider.state('create-account', {
-    url: '/new-account',
-    templateUrl: 'templates/create-account.html'
+  $stateProvider.state('password_recovery', {
+    url: '/password_recovery',
+    templateUrl: 'templates/password_recovery.html'
   });
   $urlRouterProvider.otherwise('/create-account');
 });

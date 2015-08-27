@@ -1,0 +1,24 @@
+@mixin site-sprite($image) {
+    background: image-url($image);
+    width: image-width($image)/2;
+    height: image-height($image)/2;
+    background-size: 100% 100%;
+}
+
+@mixin placeholder($color) {
+    &::-webkit-input-placeholder {
+       color: $color;
+    }
+
+    &:-moz-placeholder { /* Firefox 18- */
+       color: $color;  
+    }
+
+    &::-moz-placeholder {  /* Firefox 19+ */
+       color: $color;  
+    }
+
+    &:-ms-input-placeholder {  
+       color: $color;  
+    }
+}

@@ -1,11 +1,75 @@
-body {
-    background: generated-image-url("bg.png");
-    display: none;
-    display: block;
+html {
+    min-height: 100%;
+    font-weight: 300;
+}
+
+a {
+    text-decoration: none;
+}
+
+.scroll-content  {
+    background: black;
+    background: image-url("bg.png") no-repeat center center fixed;
+    background-size: 100% 100%;
 }
 
 .pane {
     background: none;
 }
 
+.app-padding {
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
 
+
+.submit {
+    display: block;
+    width: 100%;
+    height: 42px;
+    border: none;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.submit-blue {
+    background: #1bb9c4;
+    color: white;
+}
+
+.lines-sided {
+    overflow: hidden;
+    width: 100%;
+
+    .content-wrapper {
+        position: relative;
+        display: table;
+        margin: 0 auto;
+
+        &:before, &:after {
+            display: block;
+            content: "";
+            width: 200px;
+            height: 2px;
+            background: white;
+            @include opacity(0.3);
+            position: absolute;
+        }
+
+        &:before {
+            right: 100%;
+            top: 50%;
+            margin-right: 10px;
+        }
+
+        &:after {
+            left: 100%;
+            top: 50%;
+            margin-left: 10px;
+        }
+    }
+}

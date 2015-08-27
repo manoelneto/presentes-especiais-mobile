@@ -16,20 +16,17 @@ var paths = {
 gulp.task('default', ['compass']);
 
 gulp.task('compass', function(done) {
-  gulp.src('./www/scss/ionic.app.scss')
+  gulp.src('asdf')
     .pipe(compass({
       config_file: 'config.rb',
-      image: 'www/img',
-      generated_images_path: '/img',
-      // sass: 'scss',
-      relative: false,
+      sass: 'scss',
     }))
     // .pipe(gulp.dest('./www/css/'))
-    // .pipe(minifyCss({
-    //   keepSpecialComments: 0
-    // }))
-    // .pipe(rename({ extname: '.min.css' }))
-    // .pipe(gulp.dest('./www/css/'))
+    .pipe(minifyCss({
+      keepSpecialComments: 0
+    }))
+    .pipe(rename({ extname: '.min.css' }))
+    .pipe(gulp.dest('./www/css/'))
     .on('end', done);
 });
 

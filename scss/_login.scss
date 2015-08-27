@@ -1,0 +1,53 @@
+.login {
+    a {
+        color: white;
+    }
+}
+
+.white-mail {
+    margin-right: 10px;
+}
+
+.white-lock {
+    margin-left: 4px;
+    margin-right: 13px;
+}
+
+.img-home-logo {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.item-input {
+    &.white-opacity-3 {
+        background-color: rgba(255, 255, 255, 0.3);
+        padding-left: 10px;
+        margin-bottom: 20px;
+        border: none;
+
+        input {
+            color: white;
+            @include placeholder(white);
+        }
+    }
+}
+
+.ou {
+    margin-top: 30px;
+    color: white;
+}
+
+.facebook-login {
+    color: white;
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 20px;
+    margin-top: 20px;
+    display: block;
+    margin-bottom: 19px;
+
+    .facebook-icon {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}

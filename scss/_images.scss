@@ -1,0 +1,19 @@
+.img-home-logo {
+    width: image-width("home-logo.png");
+}
+
+.white-mail {
+    display: block;
+    @include site-sprite("white-mail@2x.png");
+}
+
+.white-lock {
+    display: block;
+    @include site-sprite("white-lock@2x.png");
+}
+
+.facebook-icon {
+    display: block;
+    @include site-sprite("facebook-icon@2x.png");
+}
+
