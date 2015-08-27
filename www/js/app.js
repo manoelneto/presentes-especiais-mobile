@@ -8,16 +8,13 @@ angular.module('starter', ['ionic', 'ui.router']).run(function($ionicPlatform) {
     }
   });
 }).controller('SignInCtrl', function($scope, $state) {
-  $scope.signIn = function(user) {
+  return $scope.signIn = function(user) {
     if (user !== null) {
       console.log('Sign-In', user);
       return $state.go('list-view');
     } else {
       return alert('Preencha os campos');
     }
-  };
-  return $scope.createAccount = function() {
-    return $state.go('create-account');
   };
 }).controller('ListViewCtrl', function($scope) {
   return console.log('ListViewCtrl');

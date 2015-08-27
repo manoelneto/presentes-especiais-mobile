@@ -17,8 +17,8 @@ angular.module('starter', [
     else
       alert 'Preencha os campos'
 
-  $scope.createAccount = ->
-    $state.go 'create-account'
+  # $scope.createAccount = ->
+  #   $state.go 'create-account'
 
 ).controller('ListViewCtrl', ($scope) ->
   console.log 'ListViewCtrl'

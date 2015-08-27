@@ -1,22 +1,25 @@
-<ion-view view-title="Sign-In">
+<ion-view view-title="Login">
   <ion-content class="text-center login" >
     <div class="app-padding">
       <img src="img/home-logo@2x.png" class="img-home-logo">
 
       <div class="list">
-        <label class="item item-input white-opacity-3">
-          <span class="white-mail"></span>
-          <input type="email" placeholder="E-mail" ng-model="user.email">
-        </label>
+        <form name="loginForm">
+          
+          <label class="item item-input white-opacity-3" data-ng-class="{error: loginForm.email.$invalid && loginForm.email.$touched}">
+            <span class="white-mail"></span>
+            <input type="email" placeholder="E-mail" name="email" ng-model="user.email" required="">
+          </label>
 
-        <label class="item item-input white-opacity-3">
-          <span class="white-lock"></span>
-          <input type="password" placeholder="Senha" ng-model="user.password">
-        </label>
+          <label class="item item-input white-opacity-3" data-ng-class="{error: loginForm.password.$invalid && loginForm.password.$touched}">
+            <span class="white-lock"></span>
+            <input type="password" placeholder="Senha" name="password" ng-model="user.password" required="">
+          </label>
 
-        <button class="submit submit-blue" ng-click="signIn(user)">
-          Entrar
-        </button>
+          <button class="submit submit-blue" ng-click="signIn(user)" data-ng-disabled="loginForm.$invalid">
+            Entrar
+          </button>
+        </form>
 
         <div class="lines-sided ou">
           <div class="content-wrapper">

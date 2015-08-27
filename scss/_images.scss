@@ -1,19 +1,11 @@
 .img-home-logo {
-    width: image-width("home-logo.png");
+    // width: image-width("home-logo.png");
+    width: 225px;
 }
 
-.white-mail {
-    display: block;
-    @include site-sprite("white-mail@2x.png");
+@each $item in white-mail, white-lock , facebook-icon, little-avatar {
+    .#{$item} {
+        display: block;
+        @include site-sprite("#{$item}@2x.png");
+    }
 }
-
-.white-lock {
-    display: block;
-    @include site-sprite("white-lock@2x.png");
-}
-
-.facebook-icon {
-    display: block;
-    @include site-sprite("facebook-icon@2x.png");
-}
-

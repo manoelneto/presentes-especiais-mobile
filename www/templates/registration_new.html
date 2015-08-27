@@ -1,23 +1,50 @@
-<ion-view view-title="Sign-In">
-  <ion-content class="text-center login" >
+<ion-view view-title="Criar conta">
+  <custom-tab>
+    <a href="#" class="back-button">
+      <i class="ion-arrow-left-c"></i> Voltar
+    </a>
+  </custom-tab>
+
+  <ion-content class="text-center registration_new" >
     <div class="app-padding">
       <img src="img/home-logo@2x.png" class="img-home-logo">
 
-      <div class="list">
-        <label class="item item-input white-opacity-3">
-          <span class="white-mail"></span>
-          <input type="email" placeholder="E-mail" ng-model="user.email">
-        </label>
+      <form name="registrationForm">
+        <div class="list">
+          <div class="row-wrap">
+            <div class="row">
+              <div class="col">
+                <label class="item item-input white-opacity-3" data-ng-class="{error: registrationForm.name.$invalid && registrationForm.name.$touched}">
+                  <span class="little-avatar"></span>
+                  <input type="text" placeholder="Nome" name="name" ng-model="user.name" required="">
+                </label> 
+              </div>
 
-        <label class="item item-input white-opacity-3">
-          <span class="white-lock"></span>
-          <input type="password" placeholder="Senha" ng-model="user.password">
-        </label>
+              <div class="col">
+                <label class="item item-input white-opacity-3" data-ng-class="{error: registrationForm.middlename.$invalid && registrationForm.middlename.$touched}">
+                  <input type="text" placeholder="Sobrenome" name="middlename" ng-model="user.middlename" required="">
+                </label> 
+              </div>
 
-        <button class="submit submit-blue" ng-click="signIn(user)">
-          Criar conta
-        </button>
-      </div>
+            </div>
+          </div>
+          <label class="item item-input white-opacity-3" data-ng-class="{error: registrationForm.email.$invalid && registrationForm.email.$touched}">
+            <span class="white-mail"></span>
+            <input type="email" placeholder="E-mail" name="email" ng-model="user.email" required="">
+          </label>
+
+          <label class="item item-input white-opacity-3" data-ng-class="{error: registrationForm.password.$invalid && registrationForm.password.$touched}">
+            <span class="white-lock"></span>
+            <input type="password" placeholder="Senha" name="password" ng-model="user.password" required="">
+          </label>
+
+          <button class="submit submit-blue" ng-click="signIn(user)" data-ng-disabled="registrationForm.$invalid">
+            Criar conta
+          </button>
+
+        </div>
+      </form>
+
     </div>
   </ion-content>
 </ion-view>

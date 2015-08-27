@@ -10898,8 +10898,36 @@ a {
   margin-left: 10px;
 }
 
+.row {
+  width: auto;
+  margin: 0 -5px;
+  padding: 0;
+}
+.row .col {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+custom-tab {
+  display: block;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  padding: 10px;
+}
+custom-tab .back-button {
+  color: white;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+button[disabled], input[disabled] {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+  opacity: 0.3;
+}
+
 .img-home-logo {
-  width: 175px;
+  width: 225px;
 }
 
 .white-mail {
@@ -10907,6 +10935,8 @@ a {
   background: url('../img/white-mail@2x.png?1440634043');
   width: 19px;
   height: 14px;
+  min-width: 19px;
+  min-height: 14px;
   background-size: 100% 100%;
 }
 
@@ -10915,6 +10945,8 @@ a {
   background: url('../img/white-lock@2x.png?1440636989');
   width: 11.5px;
   height: 16px;
+  min-width: 11.5px;
+  min-height: 16px;
   background-size: 100% 100%;
 }
 
@@ -10923,6 +10955,18 @@ a {
   background: url('../img/facebook-icon@2x.png?1440638854');
   width: 21.5px;
   height: 21.5px;
+  min-width: 21.5px;
+  min-height: 21.5px;
+  background-size: 100% 100%;
+}
+
+.little-avatar {
+  display: block;
+  background: url('../img/little-avatar@2x.png?1440706857');
+  width: 12.5px;
+  height: 16px;
+  min-width: 12.5px;
+  min-height: 16px;
   background-size: 100% 100%;
 }
 
@@ -10947,7 +10991,7 @@ a {
 .item-input.white-opacity-3 {
   background-color: rgba(255, 255, 255, 0.3);
   padding-left: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   border: none;
 }
 .item-input.white-opacity-3 input {
@@ -10967,6 +11011,9 @@ a {
 .item-input.white-opacity-3 input:-ms-input-placeholder {
   color: white;
 }
+.item-input.white-opacity-3.error {
+  background-color: rgba(255, 0, 0, 0.54);
+}
 
 .ou {
   margin-top: 30px;
@@ -10985,4 +11032,9 @@ a {
 .facebook-login .facebook-icon {
   display: inline-block;
   vertical-align: middle;
+}
+
+.registration_new .little-avatar {
+  margin-left: 3px;
+  margin-right: 12px;
 }

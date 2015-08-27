@@ -2,6 +2,8 @@
     background: image-url($image);
     width: image-width($image)/2;
     height: image-height($image)/2;
+    min-width: image-width($image)/2;
+    min-height: image-height($image)/2;
     background-size: 100% 100%;
 }
 
