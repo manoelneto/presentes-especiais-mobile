@@ -6,6 +6,7 @@ var coffee = require('gulp-coffee');
 var compass = require('gulp-compass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
+var preprocess = require('gulp-preprocess');
 var sh = require('shelljs');
 
 var paths = {
@@ -28,6 +29,25 @@ gulp.task('compass', function(done) {
     .pipe(rename({ extname: '.min.css' }))
     .pipe(gulp.dest('./www/css/'))
     .on('end', done);
+});
+
+
+gulp.task('dev', function() {
+  gulp.src('./www/coffee/config/settings.coffee')
+    .pipe(preprocess({context: { ENV: 'DEVELOPMENT', DEBUG: true}}))
+    .pipe(gulp.dest('./www/coffee'));
+});
+
+gulp.task('test_env', function() {
+  gulp.src('./www/coffee/config/settings.coffee')
+    .pipe(preprocess({context: { ENV: 'TEST', DEBUG: true}}))
+    .pipe(gulp.dest('./www/coffee'));
+});
+
+gulp.task('production', function() {
+  gulp.src('./www/coffee/config/settings.coffee')
+    .pipe(preprocess({context: { ENV: 'PRODUCTION'}}))
+    .pipe(gulp.dest('./www/coffee'));
 });
 
 gulp.task('coffee', function(done) {

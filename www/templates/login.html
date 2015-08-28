@@ -4,7 +4,7 @@
       <img src="img/home-logo@2x.png" class="img-home-logo">
 
       <div class="list">
-        <form name="loginForm">
+        <form name="loginForm" data-ng-submit="login()">
           
           <label class="item item-input white-opacity-3" data-ng-class="{error: loginForm.email.$invalid && loginForm.email.$touched}">
             <span class="white-mail"></span>
@@ -16,9 +16,13 @@
             <input type="password" placeholder="Senha" name="password" ng-model="user.password" required="">
           </label>
 
-          <button class="submit submit-blue" ng-click="signIn(user)" data-ng-disabled="loginForm.$invalid">
+          <button type="submit" class="submit submit-blue" data-ng-disabled="loginForm.$invalid">
             Entrar
           </button>
+
+          <div data-ng-if="login_error" class="error">
+            {{ login_error }}
+          </div>
         </form>
 
         <div class="lines-sided ou">
