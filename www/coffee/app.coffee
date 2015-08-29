@@ -1,14 +1,18 @@
 window.app = angular.module('app', [
   'ionic'
   'ui.router'
+  'ngOpenFB'
 ])
 
-app.run(($ionicPlatform) ->
-  $ionicPlatform.ready ->
-    if window.cordova and window.cordova.plugins.Keyboard
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar true
-    if window.StatusBar
-      StatusBar.styleDefault()
+app.run(($ionicPlatform, $openFB) ->
+    $openFB.init
+        appId: '1020478604640927'
+
+    $ionicPlatform.ready ->
+        if window.cordova and window.cordova.plugins and window.cordova.plugins.Keyboard
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar true
+        if window.StatusBar
+            StatusBar.styleDefault()
       
 )
 

@@ -1,0 +1,60 @@
+.modules_list {
+    .module {
+        height: 25%;
+        text-transform: uppercase;
+
+        &.store {
+            background: $store-color;
+        }
+
+        &.agenda {
+            background: $agenda-color;
+        }
+
+        &.indications {
+            background: $indications-color;
+        }
+
+        &.club {
+            background: $club-color;
+        }
+
+        a {
+            display: block;
+            color: white;
+            height: 100%;
+        }
+
+        .app-padding, .row-wrap, .row, .col {
+            height: 100%;
+        }
+
+        .icon-col {
+            max-width: 90px;
+        }
+
+        .tabler {
+            display: table;
+        }
+
+        .middler {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .icon {
+        }
+
+        .content-wrapper {
+
+        }
+
+            .title {
+                font-weight: bold;
+            }
+
+            .subtitle {
+                font-weight: normal;
+            }
+    }
+}

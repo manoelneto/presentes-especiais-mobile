@@ -3,9 +3,17 @@
     width: 225px;
 }
 
-@each $item in white-mail, white-lock , facebook-icon, little-avatar {
+@each $item in white-mail, white-lock , facebook-icon, little-avatar, module-store,
+module-club, module-indications, module-agenda, header-icon {
     .#{$item} {
         display: block;
         @include site-sprite("#{$item}@2x.png");
     }
+}
+
+.header-icon {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: -2px;
 }

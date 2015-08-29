@@ -15,6 +15,11 @@ $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 
+$store-color: #8944aa;
+$agenda-color: #d3325c;
+$indications-color: #e95440;
+$club-color: #e9953b;
+
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
@@ -25,3 +30,4 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "base";
 @import "images";
 @import "login";
+@import "module_list";

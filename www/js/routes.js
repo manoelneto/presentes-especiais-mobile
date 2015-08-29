@@ -6,11 +6,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
   });
   $stateProvider.state('registration_new', {
     url: '/registration/new',
-    templateUrl: 'templates/registration_new.html'
+    templateUrl: 'templates/registration_new.html',
+    controller: 'RegistrationNewCtrl'
   });
   $stateProvider.state('password_recovery', {
     url: '/password_recovery',
     templateUrl: 'templates/password_recovery.html'
   });
-  return $urlRouterProvider.otherwise('/create-account');
+  $stateProvider.state('modules_list', {
+    url: '/modules_list',
+    templateUrl: 'templates/modules_list.html',
+    controller: 'ModulesListCtrl'
+  });
+  return $urlRouterProvider.otherwise('/');
 });

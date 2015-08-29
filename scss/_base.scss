@@ -7,10 +7,9 @@ a {
     text-decoration: none;
 }
 
-.scroll-content  {
-    background: black;
-    background: image-url("bg.png") no-repeat center center fixed;
-    background-size: 100% 100%;
+ion-view {
+    background: image-url("bg.png") no-repeat center center fixed !important;
+    background-size: 100% 100% !important;
 }
 
 .pane {
@@ -86,7 +85,6 @@ a {
 }
 
 // custom tab
-
 custom-tab {
     display: block;
     position: absolute;
@@ -103,4 +101,12 @@ custom-tab {
 
 button[disabled], input[disabled] {
     @include opacity(0.3);
+}
+
+.full-height {
+    height: 100% !important;
+}
+
+.full-height-scroll > .scroll {
+    height: 100% !important;
 }

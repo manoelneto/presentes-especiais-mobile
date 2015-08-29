@@ -31,18 +31,28 @@
           </div>
         </div>
 
-        <a href="#" class="facebook-login">
-          <span class="facebook-icon"></span>
-          Entrar com Facebook
-        </a>
+        <div data-ng-if="!UserService.current_user">
+          <a href="javascript://" class="facebook-login" data-ng-click="facebookLogin()">
+            <span class="facebook-icon"></span>
+            Entrar com Facebook
+          </a>
 
-        <p>
-          <a href="#/password_recovery">Esqueceu a senha?</a>
-        </p>
+          <p>
+            <a href="#/password_recovery">Esqueceu a senha?</a>
+          </p>
 
-        <p>
-          <a href="#/registration/new" ng-click="createAccount()">Cadastre-se</a>
-        </p>
+          <p>
+            <a href="#/registration/new">Cadastre-se</a>
+          </p>
+        </div>
+
+
+        <div data-ng-if="UserService.current_user">
+          <p>
+            <a href="#/modules_list">Ir para módulos</a>
+          </p>
+        </div>
+
       </div>
     </div>
   </ion-content>

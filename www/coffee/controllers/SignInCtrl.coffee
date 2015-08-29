@@ -1,17 +1,32 @@
-app.controller 'SignInCtrl', [ '$scope', '$state', 'User', ($scope, $state, User) ->
+app.controller 'SignInCtrl', [ '$scope', '$state', 'User', 'FB', '$openFB', ($scope, $state, User, FB, $openFB) ->
 
-    $scope.user =
-        email: 'contato@manoelneto.com'
-        password: '12345678'
+    $scope.UserService = User
+    $scope.user = {}
 
     $scope.login = ->
         $scope.login_error = null
-        User.sign_in $scope.user
+        User.signIn $scope.user
             .then (response) ->
                 User.current_user = response.data
+                alert "Login realizado com sucesso, token -> #{response.data.spree_api_key}"
+
             .catch (response) ->
                 $scope.login_error = "Credenciais Inválidas"
 
-    # $scope.createAccount = ->
-    #   $state.go 'create-account'
+    $scope.facebookLogin = ->
+        loginPromise = $openFB.login scope: 'email'
+        
+        loginPromise.then (accessToken) ->
+            FB.accessToken = accessToken
+
+            User.loginWithFbToken accessToken
+                .then (response) ->
+                    User.current_user = response.data
+                    alert "Login realizado com sucesso, token -> #{response.data.spree_api_key}"
+                
+                .catch (response) ->
+                    FB.me().then (response) ->
+                        User.fbResponse = response
+                        $state.go 'registration_new'
+
 ]

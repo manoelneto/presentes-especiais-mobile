@@ -10835,10 +10835,9 @@ a {
   text-decoration: none;
 }
 
-.scroll-content {
-  background: black;
-  background: url('../img/bg.png?1440583082') no-repeat center center fixed;
-  background-size: 100% 100%;
+ion-view {
+  background: url('../img/bg.png?1440583082') no-repeat center center fixed !important;
+  background-size: 100% 100% !important;
 }
 
 .pane {
@@ -10926,6 +10925,14 @@ button[disabled], input[disabled] {
   opacity: 0.3;
 }
 
+.full-height {
+  height: 100% !important;
+}
+
+.full-height-scroll > .scroll {
+  height: 100% !important;
+}
+
 .img-home-logo {
   width: 225px;
 }
@@ -10968,6 +10975,63 @@ button[disabled], input[disabled] {
   min-width: 12.5px;
   min-height: 16px;
   background-size: 100% 100%;
+}
+
+.module-store {
+  display: block;
+  background: url('../img/module-store@2x.png?1440784082');
+  width: 62px;
+  height: 62px;
+  min-width: 62px;
+  min-height: 62px;
+  background-size: 100% 100%;
+}
+
+.module-club {
+  display: block;
+  background: url('../img/module-club@2x.png?1440784168');
+  width: 62px;
+  height: 62px;
+  min-width: 62px;
+  min-height: 62px;
+  background-size: 100% 100%;
+}
+
+.module-indications {
+  display: block;
+  background: url('../img/module-indications@2x.png?1440784132');
+  width: 62px;
+  height: 62px;
+  min-width: 62px;
+  min-height: 62px;
+  background-size: 100% 100%;
+}
+
+.module-agenda {
+  display: block;
+  background: url('../img/module-agenda@2x.png?1440784104');
+  width: 62px;
+  height: 62px;
+  min-width: 62px;
+  min-height: 62px;
+  background-size: 100% 100%;
+}
+
+.header-icon {
+  display: block;
+  background: url('../img/header-icon@2x.png?1440786748');
+  width: 31px;
+  height: 25px;
+  min-width: 31px;
+  min-height: 25px;
+  background-size: 100% 100%;
+}
+
+.header-icon {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
 }
 
 .login a {
@@ -11037,4 +11101,52 @@ button[disabled], input[disabled] {
 .registration_new .little-avatar {
   margin-left: 3px;
   margin-right: 12px;
+}
+
+.fb-image {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+.modules_list .module {
+  height: 25%;
+  text-transform: uppercase;
+}
+.modules_list .module.store {
+  background: #8944aa;
+}
+.modules_list .module.agenda {
+  background: #d3325c;
+}
+.modules_list .module.indications {
+  background: #e95440;
+}
+.modules_list .module.club {
+  background: #e9953b;
+}
+.modules_list .module a {
+  display: block;
+  color: white;
+  height: 100%;
+}
+.modules_list .module .app-padding, .modules_list .module .row-wrap, .modules_list .module .row, .modules_list .module .col {
+  height: 100%;
+}
+.modules_list .module .icon-col {
+  max-width: 90px;
+}
+.modules_list .module .tabler {
+  display: table;
+}
+.modules_list .module .middler {
+  display: table-cell;
+  vertical-align: middle;
+}
+.modules_list .module .title {
+  font-weight: bold;
+}
+.modules_list .module .subtitle {
+  font-weight: normal;
 }
