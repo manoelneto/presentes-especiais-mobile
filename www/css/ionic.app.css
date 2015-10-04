@@ -9313,7 +9313,7 @@ input:checked + .checkbox-icon:after {
   color: #444;
 }
 .item-select.item-stable:after, .item-select.item-stable .input-label {
-  color: #656565;
+  color: #666666;
 }
 .item-select.item-positive select {
   background: #387ef5;

@@ -1,0 +1,69 @@
+= PEM
+
+Presentes Especiais Mobile, aka PEM, is a project to create hybrid mobile apps. It uses Ionic
+
+== Getting started
+
+=== Downloading
+
+Download this project
+
+  $ git clone GIT_PROJECT_URL
+
+=== Installing
+
+==== Dependences
+
+Check Peb docs for configuring rails enviroment, you need to install something like that to install compass (css preprocessor) and yard (documentation). The only difference will be on creating gemset, there you create peb (for backend), here you create pem (for mobile).
+
+Install node js
+
+  $ sudo apt-get install node-js
+
+==== Project
+
+Enter you project
+
+  $ cd PROJECT_PATH
+
+Install node dependences
+
+  $ npm install
+
+=== Runing
+
+Runing project
+
+  $ ionic serve
+
+== Developing
+
+=== Gulp
+
+Ionic uses gulp, feel free to edit gulp file and add other tasks.
+
+=== Saas (css)
+
+Saas is use to generate css files, this files is located at scss folder.
+
+the only file generated is files that don`t begin with _ (underscore). The main file is ionic.app.scss. If new file is need, you can add an file with _ and require it in ionic.app.scss
+
+ionic serve will generate css files on each edit.
+
+Files is generated to www/css, NEVER EDIT A FILE IN THIS FOLDER
+
+=== Coffescript (javascript)
+
+Coffe is use to generate js files, this files is located at www/coffee folder
+
+All files in this section will be generated. If you need other file, you can create and references in index.html.
+
+ionic serve will generate js files on each edit.
+
+Files is generated to www/js, NEVER EDIT A FILE IN THIS FOLDER
+
+== Project Structure
+
+Main file is www/index.html
+
+Templates is in www/templates

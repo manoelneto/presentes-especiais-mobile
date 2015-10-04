@@ -1,0 +1,123 @@
+== PEM
+
+Presentes Especiais Mobile, aka PEM, is a project to create hybrid mobile apps. It uses Ionic
+
+== Getting started
+
+=== Configuring enviroment
+
+Wee need to wrap your gens to not use system gens and override gens that you don`t want to. For this purpose, you need to install rvm (easyier) or rbenv.
+
+==== Installing rvm
+
+Install rvm
+
+  $ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+
+  $ \curl -sSL https://get.rvm.io | bash -s stable
+
+
+Project url: https://rvm.io/
+
+==== Installing rbenv
+
+1. Check out rbenv into `~/.rbenv`.
+
+    $ git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+
+2. Add `~/.rbenv/bin` to your `$PATH` for access to the `rbenv`
+   command-line utility.
+
+    $ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
+
+    **Ubuntu Desktop note**: Modify your `~/.bashrc` instead of `~/.bash_profile`.
+
+    **Zsh note**: Modify your `~/.zshrc` file instead of `~/.bash_profile`.
+
+3. Add `rbenv init` to your shell to enable shims and autocompletion.
+
+    $ echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+
+    _Same as in previous step, use `~/.bashrc` on Ubuntu, or `~/.zshrc` for Zsh._
+
+4. Restart your shell so that PATH changes take effect. (Opening a new
+   terminal tab will usually do it.) Now check if rbenv was set up:
+
+    $ type rbenv
+    #=> "rbenv is a function"
+
+5. _(Optional)_ Install [ruby-build][], which provides the
+   `rbenv install` command that simplifies the process of
+   [installing new Ruby versions](#installing-ruby-versions).
+
+Check all rubys installed
+
+  rbenv versions list
+
+Install ruby 2.2.0 if isn`t installed
+
+  rbenv install 2.2.0
+
+Instaling rbenv gemset plugins
+
+  See details at https://github.com/jf/rbenv-gemset
+
+Create this project gemset
+
+  rbenv gemset create 2.2.0 pem
+
+Project url: https://github.com/sstephenson/rbenv
+
+=== Downloading
+
+Download this project
+
+  $ git clone GIT_PROJECT_URL
+
+=== Installing
+
+Enter you project
+
+  $ cd PROJECT_PATH
+
+Install ruby dependences
+
+  $ bundle
+
+if using rbenv and resulting 'rbenv: bundle: command not found', you must install it and run bundle again
+
+  $ gem install bundler
+
+Install node dependences
+
+  $ npm install
+
+=== Runing
+
+Runing project
+
+  $ ionic serve
+
+Runing project with guard (prefferable)
+
+  $ guard
+
+Then you can see in the browser in
+
+  http://localhost:3000
+
+Guard is a project to listen changes in your code and executing it. A good example is live testing when you change anything.
+
+== Documentation
+
+To see others documentations features of this project, you can run this doc.
+
+=== Runing
+
+Runing doc
+
+  yard server --reload
+
+Then you can see in the browser in
+
+  http://localhost:8808

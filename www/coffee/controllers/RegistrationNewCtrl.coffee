@@ -3,7 +3,7 @@ app.controller 'RegistrationNewCtrl', [ '$scope', '$state', 'User', ($scope, $st
     if User.fbResponse
         $scope.user =
             first_name: User.fbResponse.first_name
-            last_name: "#{User.fbResponse.middle_name} #{User.fbResponse.last_name}"
+            last_name: "#{User.fbResponse.last_name}"
             email: User.fbResponse.email
             image_url: User.fbResponse.picture.data.url
             identities_attributes: [
