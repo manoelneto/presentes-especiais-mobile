@@ -15,10 +15,12 @@ GEM
     compass-import-once (1.0.5)
       sass (>= 3.2, < 3.5)
     ffi (1.9.10)
+    github-markup (1.4.0)
     multi_json (1.11.2)
     rb-fsevent (0.9.6)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
+    redcarpet (3.3.3)
     sass (3.4.18)
     yard (0.8.7.6)
 
@@ -27,6 +29,8 @@ PLATFORMS
 
 DEPENDENCIES
   compass
+  github-markup
+  redcarpet
   yard
 
 BUNDLED WITH
