@@ -1,0 +1,20 @@
+swiper-slider {
+
+  .swiper-container {
+    display: block;
+    width: auto;
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
+  .swiper-button-prev {
+
+  }
+
+  &.no-slide-width {
+    .swiper-slide {
+      width: auto;
+    }
+  }
+}
+

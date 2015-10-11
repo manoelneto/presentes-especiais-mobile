@@ -18,5 +18,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/modules_list.html',
     controller: 'ModulesListCtrl'
   });
+  $stateProvider.state('products_index', {
+    url: '/produtos',
+    templateUrl: 'templates/products/index.html',
+    controller: 'ProductIndexCtrl'
+  });
   return $urlRouterProvider.otherwise('/');
 });

@@ -11150,3 +11150,13 @@ button[disabled], input[disabled] {
 .modules_list .module .subtitle {
   font-weight: normal;
 }
+
+swiper-slider .swiper-container {
+  display: block;
+  width: auto;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+swiper-slider.no-slide-width .swiper-slide {
+  width: auto;
+}

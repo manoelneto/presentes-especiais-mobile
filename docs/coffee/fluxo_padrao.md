@@ -22,6 +22,11 @@ app.controller 'RegisterCtrl', ['$scope', ($scope) ->
 
 ]
 ```
+* adiciona RegisterCtrl ao www/index.html
+
+```
+<script src="js/controllers/RegisterCtrl.js"></script>
+```
 
 * cria www/templates/register.html 
 ```
