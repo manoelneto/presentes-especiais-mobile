@@ -1,7 +1,26 @@
-<ion-view view-title="Login">
-  <ion-content class="text-center login">
+<ion-view view-title="Product List">
+  <ion-content class="product-list-screen">
 
     <small-categories-list></small-categories-list>
+
+    <section class="product-list">
+      <article class="product" data-ng-repeat="n in [1, 2]">
+        <figure>
+          <!-- h258 -->
+          <img src="http://placehold.it/258x258" alt="">
+        </figure>
+
+        <div class="header">
+          <h2 class="title">
+            Caneca de porcelana
+          </h2>
+
+          <a href="#" class="personalize">
+            Personalizar
+          </a>
+        </div>
+      </article>
+    </section>
 
   </ion-content>
 </ion-view>

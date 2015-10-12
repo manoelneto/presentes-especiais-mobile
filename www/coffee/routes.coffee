@@ -1,8 +1,13 @@
 app.config ($stateProvider, $urlRouterProvider) ->
+  # $stateProvider.state 'index',
+  #   url: ''
+  #   templateUrl: 'templates/login.html'
+  #   controller: 'SignInCtrl'
+
   $stateProvider.state 'index',
     url: ''
-    templateUrl: 'templates/login.html'
-    controller: 'SignInCtrl'
+    templateUrl: 'templates/products/index.html'
+    controller: 'ProductIndexCtrl'
 
   $stateProvider.state 'registration_new',
     url: '/registration/new'
