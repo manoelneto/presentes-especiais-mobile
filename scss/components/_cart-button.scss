@@ -1,0 +1,19 @@
+.cart-button {
+  position: relative;
+
+  .counter {
+    position: absolute;
+    z-index: 1;
+    left: 14px;
+    margin: 0 !important;
+    text-align: center;
+    width: 17px;
+    top: -6px;
+    font-weight: bold;
+  }
+
+  i {
+    position: relative;
+    z-index: 0;
+  }
+}

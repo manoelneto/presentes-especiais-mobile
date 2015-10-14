@@ -1,25 +1,34 @@
-<ion-view view-title="Product List">
-  <ion-content class="product-list-screen">
+
+<ion-view view-title="Loja Virtual" class="store">
+  <ion-nav-buttons side="right">
+    <cart-button></cart-button>
+    <menu-toggle-right-button></menu-toggle-right-button>
+  </ion-nav-buttons>
+
+  <ion-content class="product-list-screen has-header">
+    <top-bar-light></top-bar-light>
 
     <small-categories-list></small-categories-list>
 
     <section class="product-list">
-      <article class="product" data-ng-repeat="n in [1, 2]">
-        <figure>
-          <!-- h258 -->
-          <img src="http://placehold.it/258x258" alt="">
-        </figure>
+      <div class="row" data-ng-repeat="n in [1, 2, 3, 4, 5]">
+        <article class="product" data-ng-repeat="n in [1, 2]">
+          <figure>
+            <!-- h258 -->
+            <img src="http://placehold.it/258x258" alt="">
+          </figure>
 
-        <div class="header">
-          <h2 class="title">
-            Caneca de porcelana
-          </h2>
+          <div class="header">
+            <h2 class="title">
+              Caneca de porcelana
+            </h2>
 
-          <a href="#" class="personalize">
-            Personalizar
-          </a>
-        </div>
-      </article>
+            <a href="#" class="personalize">
+              Personalizar
+            </a>
+          </div>
+        </article>
+      </div>
     </section>
 
   </ion-content>

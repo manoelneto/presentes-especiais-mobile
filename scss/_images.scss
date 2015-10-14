@@ -3,8 +3,17 @@
     width: 225px;
 }
 
-@each $item in white-mail, white-lock , facebook-icon, little-avatar, module-store,
-module-club, module-indications, module-agenda, header-icon {
+@each $item in white-mail,
+white-lock,
+facebook-icon,
+little-avatar,
+module-store,
+module-club,
+module-indications,
+module-agenda,
+header-icon,
+icon-cart,
+icon-product-info {
     .#{$item} {
         display: block;
         @include site-sprite("#{$item}@2x.png");

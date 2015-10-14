@@ -13,7 +13,7 @@ app.run(($ionicPlatform, $openFB) ->
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar true
         if window.StatusBar
             StatusBar.styleDefault()
-      
+
 )
 
 # .controller('SignInCtrl', ($scope, $state) ->

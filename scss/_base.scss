@@ -110,3 +110,21 @@ button[disabled], input[disabled] {
 .full-height-scroll > .scroll {
     height: 100% !important;
 }
+
+.back-button {
+  background: none;
+  border: none;
+}
+
+ion-view {
+  &.store {
+    background: #8944aa !important;
+  }
+}
+
+ion-header-bar {
+  .title {
+    text-transform: uppercase;
+    font-weight: 400 !important;
+  }
+}

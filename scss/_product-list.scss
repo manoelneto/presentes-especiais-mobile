@@ -5,14 +5,25 @@
 }
 
 .product-list {
-  @extend .row;
   margin: 0 15px;
   margin-top: 30px;
+
+  > .row {
+    margin: 0;
+
+    & + .row {
+
+      .product {
+        border-top: none;
+      }
+    }
+  }
 
   .product {
     @extend .col;
     padding: 0;
     border: 1px solid #ededed;
+    padding-bottom: 5px;
 
     & + & {
       border-left: none;
@@ -35,12 +46,13 @@
       }
 
       .personalize {
-        display: inline-block;
+        display: block;
         background: #1bb9c3;
         color: white;
         text-transform: uppercase;
-        font-weight: 400;
+        font-weight: 500;
         padding: 5px;
+        text-align: center;
       }
   }
 }

@@ -1,17 +1,11 @@
-<ion-view view-title="Criar conta">
-  <custom-tab>
-    <a href="#" class="back-button">
-      <i class="ion-arrow-left-c"></i> Voltar
-    </a>
-  </custom-tab>
-
+<ion-view>
   <ion-content class="text-center registration_new" >
     <div class="app-padding">
       <img src="img/home-logo@2x.png" class="img-home-logo">
 
       <form name="registrationForm" data-ng-submit="signUp()">
         <div class="list">
-          
+
           <img ng-src="{{ user.image_url }}" alt="" data-ng-if="user.image_url" class="fb-image">
 
           <div class="row-wrap">
@@ -20,13 +14,13 @@
                 <label class="item item-input white-opacity-3" data-ng-class="{error: registrationForm.first_name.$invalid && registrationForm.first_name.$touched}">
                   <span class="little-avatar"></span>
                   <input type="text" placeholder="Nome" name="first_name" ng-model="user.first_name" required="">
-                </label> 
+                </label>
               </div>
 
               <div class="col">
                 <label class="item item-input white-opacity-3" data-ng-class="{error: registrationForm.last_name.$invalid && registrationForm.last_name.$touched}">
                   <input type="text" placeholder="Sobrenome" name="last_name" ng-model="user.last_name" required="">
-                </label> 
+                </label>
               </div>
 
             </div>

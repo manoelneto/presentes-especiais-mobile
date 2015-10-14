@@ -1,11 +1,11 @@
-<ion-view view-title="Login">
+<ion-view view-title="Login" hide-nav-bar="true">
   <ion-content class="text-center login" >
     <div class="app-padding">
       <img src="img/home-logo@2x.png" class="img-home-logo">
 
       <div class="list">
         <form name="loginForm" data-ng-submit="login()">
-          
+
           <label class="item item-input white-opacity-3" data-ng-class="{error: loginForm.email.$invalid && loginForm.email.$touched}">
             <span class="white-mail"></span>
             <input type="email" placeholder="E-mail" name="email" ng-model="user.email" required="">
@@ -38,18 +38,20 @@
           </a>
 
           <p>
-            <a href="#/password_recovery">Esqueceu a senha?</a>
+            <a href="#/password_recovery"> Esqueceu a senha?</a>
           </p>
 
           <p>
-            <a href="#/registration/new">Cadastre-se</a>
+            <a href="#/registration/new"> Cadastre-se</a>
           </p>
         </div>
 
 
-        <div data-ng-if="UserService.current_user">
+        <div data-ng-if="UserService.current_user"></div>
+        <div>
           <p>
             <a href="#/modules_list">Ir para módulos</a>
+            <a href="#/produtos">Produtos</a>
           </p>
         </div>
 

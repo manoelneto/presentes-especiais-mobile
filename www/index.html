@@ -29,12 +29,29 @@
 
   <script src="js/directives/swiperSlider.js"></script>
   <script src="js/directives/smallCategoriesList.js"></script>
+  <script src="js/directives/cartButton.js"></script>
+  <script src="js/directives/menuToggleRightButton.js"></script>
+  <script src="js/directives/topBarLight.js"></script>
 
   <script src="js/routes.js"></script>
 
 </head>
 
 <body>
+    <ion-nav-bar class="bar-clear">
+      <ion-nav-back-button>
+        Voltar
+      </ion-nav-back-button>
+
+      <ion-nav-title>
+        <span class="header-icon"></span>
+      </ion-nav-title>
+
+      <ion-nav-buttons side="right">
+        <menu-toggle-right-button></menu-toggle-right-button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+
     <ion-nav-view></ion-nav-view>
 </body>
 </html>
