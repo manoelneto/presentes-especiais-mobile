@@ -1,8 +1,8 @@
 app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state('index', {
     url: '',
-    templateUrl: 'templates/products/index.html',
-    controller: 'ProductIndexCtrl'
+    templateUrl: 'templates/login.html',
+    controller: 'SignInCtrl'
   });
   $stateProvider.state('registration_new', {
     url: '/registration/new',
@@ -22,6 +22,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/produtos',
     templateUrl: 'templates/products/index.html',
     controller: 'ProductIndexCtrl'
+  });
+  $stateProvider.state('products_show', {
+    url: '/produtos/:id',
+    templateUrl: 'templates/products/show.html',
+    controller: 'ProductShowCtrl'
+  });
+  $stateProvider.state('indication', {
+    url: '/indicacao',
+    templateUrl: 'templates/indication.html',
+    controller: 'IndicationCtrl'
   });
   return $urlRouterProvider.otherwise('/');
 });

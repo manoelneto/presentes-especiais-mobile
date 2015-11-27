@@ -10947,6 +10947,10 @@ ion-header-bar .title {
   font-weight: 400 !important;
 }
 
+.white-content {
+  background: white;
+}
+
 .img-home-logo {
   width: 225px;
 }
@@ -11236,10 +11240,6 @@ swiper-slider.no-slide-width .swiper-slide {
 }
 .modules_list .module .subtitle {
   font-weight: normal;
-}
-
-.product-list-screen {
-  background: white;
 }
 
 .product-list {

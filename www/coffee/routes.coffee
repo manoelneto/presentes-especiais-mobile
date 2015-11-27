@@ -1,14 +1,27 @@
 app.config ($stateProvider, $urlRouterProvider) ->
+<<<<<<< HEAD
   
   #$stateProvider.state 'index',
   #  url: ''
   # templateUrl: 'templates/login.html'
   #  controller: 'SignInCtrl'
+=======
+>>>>>>> 2f66522b3653d70117de954076db34d49b81ba57
 
   $stateProvider.state 'index',
     url: ''
-    templateUrl: 'templates/products/index.html'
-    controller: 'ProductIndexCtrl'
+    templateUrl: 'templates/login.html'
+    controller: 'SignInCtrl'
+
+  # $stateProvider.state 'index',
+  #   url: '/'
+  #   templateUrl: 'templates/products/index.html'
+  #   controller: 'ProductIndexCtrl'
+
+  # $stateProvider.state 'index',
+  #   url: '/'
+  #   templateUrl: 'templates/products/show.html'
+  #   controller: 'ProductShowCtrl'
 
   $stateProvider.state 'registration_new',
     url: '/registration/new'
@@ -29,4 +42,15 @@ app.config ($stateProvider, $urlRouterProvider) ->
     templateUrl: 'templates/products/index.html'
     controller: 'ProductIndexCtrl'
 
+  $stateProvider.state 'products_show',
+    url: '/produtos/:id'
+    templateUrl: 'templates/products/show.html'
+    controller: 'ProductShowCtrl'
+
+  $stateProvider.state 'indication',
+    url: '/indicacao'
+    templateUrl: 'templates/indication.html'
+    controller: 'IndicationCtrl'
+
   $urlRouterProvider.otherwise '/'
+
