@@ -11,16 +11,16 @@
     <small-categories-list></small-categories-list>
 
     <section class="product-list">
-      <div class="row" data-ng-repeat="n in [1, 2, 3, 4, 5]">
-        <article class="product" data-ng-repeat="n in [1, 2]">
+      <div class="row" data-ng-repeat="chunck in productsChuncks">
+        <article class="product" data-ng-repeat="product in chunck">
           <figure>
             <!-- h258 -->
-            <img src="http://placehold.it/258x258" alt="">
+            <img src="http://placehold.it/258x258" data-ng-src="{{ product.getSmallImage() }}" alt="">
           </figure>
 
           <div class="header">
             <h2 class="title">
-              Caneca de porcelana
+              {{ product.getName() }}
             </h2>
 
             <a href="/produtos/{{ n }}" class="personalize">

@@ -1,9 +1,4 @@
 app.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider.state('index', {
-    url: '',
-    templateUrl: 'templates/login.html',
-    controller: 'SignInCtrl'
-  });
   $stateProvider.state('registration_new', {
     url: '/registration/new',
     templateUrl: 'templates/registration_new.html',
@@ -33,5 +28,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/indication.html',
     controller: 'IndicationCtrl'
   });
-  return $urlRouterProvider.otherwise('/');
+  $stateProvider.state('login', {
+    url: '/login',
+    templateUrl: 'templates/login.html',
+    controller: 'SignInCtrl'
+  });
+  return $urlRouterProvider.otherwise('/produtos');
 });

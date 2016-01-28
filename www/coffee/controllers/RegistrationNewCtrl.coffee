@@ -27,7 +27,7 @@ app.controller 'RegistrationNewCtrl', [ '$scope', '$state', 'User', ($scope, $st
                 User.current_user = response.data
                 alert "Usuário cadastrado com sucesso"
             .catch (response) ->
-                if response.data.email
+                if response and response.data and response.data.email
                     $scope.has_email = true
                 else
                     alert "Houve um erro ao conectar com o servidor"
