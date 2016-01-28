@@ -1,5 +1,10 @@
 app.config ($stateProvider, $urlRouterProvider) ->
 
+  #$stateProvider.state 'index',
+  #  url: ''
+  # templateUrl: 'templates/login.html'
+  #  controller: 'SignInCtrl'
+
   # $stateProvider.state 'index',
   #   url: '/'
   #   templateUrl: 'templates/products/index.html'
