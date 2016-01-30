@@ -1,16 +1,9 @@
-<swiper-slider class='no-slide-width small-category-list'>
+<swiper-slider class='no-slide-width small-category-list' >
 
-  <div class="swiper-slide">
+  <div class="swiper-slide" data-ng-repeat="category in categories">
     <a href="#">
-      <img src="http://placehold.it/25x21" alt="">
-      Xícaras
-    </a>
-  </div>
-
-  <div class="swiper-slide">
-    <a href="#">
-      <img src="http://placehold.it/25x21" alt="">
-      Canecas
+      <img data-ng-src="{{ category.getSmallImage() }}" alt="{{ category.getName() }}">
+      {{ category.getName() }}
     </a>
   </div>
 
