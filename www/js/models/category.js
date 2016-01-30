@@ -2,7 +2,7 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 app.factory("Category", [
-  'Model', 'API', function(Model, API) {
+  'Model', 'API', 'Product', function(Model, API, Product) {
     var Category;
     Category = (function(superClass) {
       extend(Category, superClass);
@@ -13,6 +13,19 @@ app.factory("Category", [
 
       Category.prototype.getName = function() {
         return this.attributes.name;
+      };
+
+      Category.prototype.getUrl = function() {
+        return "/categorias/" + this.attributes.id;
+      };
+
+      Category.prototype.getProducts = function() {
+        if (!this.products) {
+          this.products = this.attributes.products.map(function(product) {
+            return new Product(product);
+          });
+        }
+        return this.products;
       };
 
       Category.prototype.getSmallImage = function() {

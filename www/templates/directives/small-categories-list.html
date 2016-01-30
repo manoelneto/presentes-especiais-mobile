@@ -1,7 +1,7 @@
 <swiper-slider class='no-slide-width small-category-list' data-wait="true">
 
   <div class="swiper-slide" data-ng-repeat="category in categories">
-    <a href="#">
+    <a href="#{{ category.getUrl() }}">
       <img data-ng-src="{{ category.getSmallImage() }}" alt="{{ category.getName() }}">
       {{ category.getName() }}
     </a>

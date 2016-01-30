@@ -1,0 +1,16 @@
+
+<ion-view view-title="{{ category.getName() }}" class="store">
+  <ion-nav-buttons side="right">
+    <cart-button></cart-button>
+    <menu-toggle-right-button></menu-toggle-right-button>
+  </ion-nav-buttons>
+
+  <ion-content class="white-content has-header">
+    <top-bar-light></top-bar-light>
+
+    <small-categories-list></small-categories-list>
+
+    <div data-ng-include="'templates/products/product-list.html'"></div>
+
+  </ion-content>
+</ion-view>

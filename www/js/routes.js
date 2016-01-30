@@ -23,6 +23,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/products/show.html',
     controller: 'ProductShowCtrl'
   });
+  $stateProvider.state('categories_show', {
+    url: '/categorias/:id',
+    templateUrl: 'templates/categories/show.html',
+    controller: 'CategoryShowCtrl'
+  });
   $stateProvider.state('indication', {
     url: '/indicacao',
     templateUrl: 'templates/indication.html',
