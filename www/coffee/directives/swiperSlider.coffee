@@ -1,14 +1,5 @@
-app.directive 'swiperSlider', ['$timeout', ($timeout) ->
-  transclude: true
-  templateUrl: 'templates/directives/swiper-slider.html'
-
-  link: (scope, el, attrs) ->
-
-    # findind container
-    childArray = Array.prototype.slice.call el.children()
-    container = childArray.filter (child) ->
-      angular.element(child).hasClass 'swiper-container'
-
+app.directive 'swiperSlider', ['$timeout', 'SwiperFacade', ($timeout, SwiperFacade) ->
+  initSwiper = (container) ->
     swiper = new Swiper(container, {
       # slides with no fix width
       slidesPerView: 'auto'
@@ -22,4 +13,29 @@ app.directive 'swiperSlider', ['$timeout', ($timeout) ->
       # space between slides
       spaceBetween: 20
     })
+
+  transclude: true
+  templateUrl: 'templates/directives/swiper-slider.html'
+  scope:
+    wait: '&wait'
+
+  link: (scope, el, attrs) ->
+
+    wait = scope.wait()
+
+    # findind container
+    childArray = Array.prototype.slice.call el.children()
+    container = childArray.filter (child) ->
+      angular.element(child).hasClass 'swiper-container'
+
+    if not wait
+      initSwiper container
+    else
+      # you must call swiper facade init to
+      # init here
+      SwiperFacade.onInit scope, ->
+        $timeout ->
+          initSwiper container
+        , 100
+
 ]
