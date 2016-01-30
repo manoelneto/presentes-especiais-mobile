@@ -33,7 +33,8 @@ app.factory "Service", [ '$http', '$q', ($http, $q) ->
 
         $http.get "#{@baseUrl}/#{id}.json"
           .then (response) =>
-            item = new @modelClass(response)
+            item = @getItenFromResponse response
+            item = new @modelClass(item)
 
             resolve(item)
 
@@ -46,6 +47,11 @@ app.factory "Service", [ '$http', '$q', ($http, $q) ->
     # this will get response.data.products
     @getItensFromResponse = (response) ->
       response.data[@plural_resource_name()]
+
+    # get single item from response
+    # this get response.data
+    @getItenFromResponse = (response) ->
+      response.data
 
     # define plural resource
     @plural_resource_name = ->

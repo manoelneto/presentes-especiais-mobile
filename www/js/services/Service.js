@@ -30,7 +30,8 @@ app.factory("Service", [
           return function(resolve, reject) {
             return $http.get(_this.baseUrl + "/" + id + ".json").then(function(response) {
               var item;
-              item = new _this.modelClass(response);
+              item = _this.getItenFromResponse(response);
+              item = new _this.modelClass(item);
               return resolve(item);
             })["catch"](function() {
               return reject();
@@ -41,6 +42,10 @@ app.factory("Service", [
 
       Service.getItensFromResponse = function(response) {
         return response.data[this.plural_resource_name()];
+      };
+
+      Service.getItenFromResponse = function(response) {
+        return response.data;
       };
 
       Service.plural_resource_name = function() {
