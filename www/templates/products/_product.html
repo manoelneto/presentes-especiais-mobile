@@ -8,7 +8,7 @@
     {{ product.getName() }}
   </h2>
 
-  <a href="/produtos/{{ n }}" class="personalize">
+  <a href="{{ product.getPersonalizationUrl() }}" class="personalize">
     Personalizar
   </a>
 </div>

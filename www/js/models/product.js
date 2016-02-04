@@ -15,12 +15,20 @@ app.factory("Product", [
         return this.attributes.name;
       };
 
+      Product.prototype.getThemes = function() {
+        return this.attributes.themes;
+      };
+
       Product.prototype.getSmallImage = function() {
         var images;
         images = this.attributes.master.images.map(function(image) {
           return "" + API.base_image_url + image.product_url;
         });
         return images[0];
+      };
+
+      Product.prototype.getPersonalizationUrl = function() {
+        return "#/produtos/" + this.attributes.id + "/personalizar";
       };
 
       return Product;

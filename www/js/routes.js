@@ -18,6 +18,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/products/index.html',
     controller: 'ProductIndexCtrl'
   });
+  $stateProvider.state('product_personalization', {
+    url: '/produtos/:id/personalizar',
+    templateUrl: 'templates/products/personalization.html',
+    controller: 'ProductPersonalizationCtrl'
+  });
   $stateProvider.state('products_show', {
     url: '/produtos/:id',
     templateUrl: 'templates/products/show.html',
@@ -37,6 +42,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/login',
     templateUrl: 'templates/login.html',
     controller: 'SignInCtrl'
+  });
+  $stateProvider.state('cart', {
+    url: '/carrinho',
+    templateUrl: 'templates/cart.html',
+    controller: 'CartCtrl'
   });
   return $urlRouterProvider.otherwise('/produtos');
 });

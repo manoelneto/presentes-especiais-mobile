@@ -1,0 +1,52 @@
+<ion-view view-title="Carrinho" class="store cart-page">
+  <ion-nav-buttons side="right">
+    <cart-button></cart-button>
+    <menu-toggle-right-button></menu-toggle-right-button>
+  </ion-nav-buttons>
+
+  <ion-content class="white-content has-header">
+    <top-bar-light></top-bar-light>
+
+    <div class="cart-personalization-list">
+      <div class="cart-personalization-item row row-center" data-ng-repeat="n in [1, 2, 3, 4, 5]">
+        <!-- <div class="col col-75">
+          <div class="row row-center">
+
+          </div>
+        </div> -->
+
+        <div class="col col-10">
+          <a href="#" class="cart-exclude-item-button">
+            <i class="cart-exclude-item m-auto"></i>
+          </a>
+        </div>
+
+        <div class="col col-20">
+          <img src="http://localhost:3000/spree/products/23/small/ror_bag.jpeg?1449019362" alt="" class="w-100">
+        </div>
+
+        <div class="col cart-description">
+          Descrição do item <br>
+          Quantidade: <b>1</b>
+        </div>
+
+        <div class="col cart-price-col col-20">
+          <span class="cart-price">
+            R$: 100
+          </span>
+          <div>
+            <a href="#">
+              <i class="cart-personalization-edit"></i>
+            </a>
+
+            <a href="#">
+              <i class="cart-personalization-car"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

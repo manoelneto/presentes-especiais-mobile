@@ -1,6 +1,10 @@
 .cart-button {
   position: relative;
 
+  a {
+    color: white;
+  }
+
   .counter {
     position: absolute;
     z-index: 1;

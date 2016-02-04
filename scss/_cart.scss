@@ -1,0 +1,37 @@
+.cart-personalization-list {
+
+}
+
+  .cart-personalization-item {
+    border-bottom: 1px solid #9b9b9b;
+
+    &, & + .cart-personalization-item {
+      padding: 10px 20px;
+      margin: 0;
+    }
+
+    &, a {
+      color: #9b9b9b;
+    }
+  }
+
+    .cart-exclude-item-button {
+      display: block;
+      width: 100%;
+      padding: 20px 0;
+    }
+
+    .cart-description {
+      font-weight: 400;
+    }
+
+    .cart-price-col {
+      i {
+        display: inline-block;
+      }
+    }
+
+      .cart-price {
+        font-weight: 900;
+      }
+

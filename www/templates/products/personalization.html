@@ -1,0 +1,58 @@
+
+<ion-view view-title="Personalize" class="store personalization">
+  <ion-nav-buttons side="right">
+    <cart-button></cart-button>
+    <menu-toggle-right-button></menu-toggle-right-button>
+  </ion-nav-buttons>
+
+  <ion-content class="white-content has-header">
+    <div class="product-name">
+      {{ product.getName() }}
+    </div>
+
+    <div class="molde-wrapper">
+      <img src="http://localhost:3000/uploads/personalization/picture/6/area_bg_pp.jpeg" alt="" class="personalization-molde">
+
+      <div class="personalization-area photo" style="{{ areaEdition.getCss() }}" data-ng-repeat="areaEdition in layout.getAreaEditions()">
+        <a href="#">
+          {{ areaEdition.getAreaTypeName() }}
+        </a>
+      </div>
+    </div>
+
+    <div class="row row-m-20">
+      <div class="col">
+        <a href="#" class="personalization-strong-button">
+          Próximo
+        </a>
+      </div>
+
+      <div class="col">
+        <a href="#" class="personalization-strong-button">
+          Adicionar
+        </a>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="footer-margin"></div>
+    <div class="clearfix"></div>
+  </ion-content>
+
+  <div class="footer">
+    <div class="row row-center main-footer-row">
+      <div class="col">
+        <a href="#" class="active">
+          <i class="icon-layout"></i>
+          Layout
+        </a>
+      </div>
+      <div class="col">
+        <a href="">
+          <i class="icon-theme"></i>
+          Temas
+        </a>
+      </div>
+    </div>
+  </div>
+</ion-view>

@@ -82,6 +82,10 @@ ion-view {
         padding-top: 0;
         padding-bottom: 0;
     }
+
+    &.row-m-20 {
+      margin: 0 15px;
+    }
 }
 
 // custom tab
@@ -132,4 +136,16 @@ ion-header-bar {
 .white-content {
   // white content
   background: white;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.middle {
+  text-align: middle;
+}
+
+.m-auto {
+  margin: 0 auto;
 }
