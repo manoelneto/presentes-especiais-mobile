@@ -1,14 +1,12 @@
-app.factory("Model", [
-  function() {
-    var Model;
-    Model = (function() {
-      function Model(attributes) {
-        this.attributes = attributes;
-      }
+app.factory("Model", function() {
+  var Model;
+  Model = (function() {
+    function Model(attributes) {
+      this.attributes = attributes;
+    }
 
-      return Model;
-
-    })();
     return Model;
-  }
-]);
+
+  })();
+  return Model;
+});

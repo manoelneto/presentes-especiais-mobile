@@ -19,6 +19,7 @@ app.factory("Service", [
               });
               return resolve(itens);
             })["catch"](function() {
+              console.log(JSON.stringify(arguments));
               return reject();
             });
           };

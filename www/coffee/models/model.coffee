@@ -1,6 +1,6 @@
 # Todos os models devem estender dessa classe
 
-app.factory "Model", [ ->
+app.factory "Model", ->
 
   class Model
 
@@ -9,4 +9,3 @@ app.factory "Model", [ ->
       @attributes = attributes
 
   Model
-]

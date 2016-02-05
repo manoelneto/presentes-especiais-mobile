@@ -25,6 +25,7 @@ app.factory "Service", [ '$http', '$q', ($http, $q) ->
             resolve(itens)
 
           .catch ->
+            console.log JSON.stringify arguments
             reject()
 
     # responsable to get a single object passing an id
