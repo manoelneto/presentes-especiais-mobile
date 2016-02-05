@@ -6,7 +6,7 @@ app.controller('ProductPersonalizationCtrl', [
       $scope.product = product;
       return createUserPersonalization();
     });
-    return createUserPersonalization = function() {
+    createUserPersonalization = function() {
       $scope.userPersonalization = new UserPersonalization($scope.product.getThemes());
       $scope.userPersonalization.onChange('personalization', function(personalization) {
         return $scope.personalization = personalization;
@@ -18,6 +18,27 @@ app.controller('ProductPersonalizationCtrl', [
         return $scope.layout = layout;
       });
       return $scope.userPersonalization.setDefault();
+    };
+    return $scope.imagePicker = function() {
+      var options;
+      console.log('runing image picker');
+      options = {
+        maximumImagesCount: 10,
+        width: 800,
+        height: 800,
+        quality: 80
+      };
+      return imagePicker.getPictures(function(results) {
+        var i;
+        console.log(results);
+        i = 0;
+        while (i < results.length) {
+          console.log('Image URI: ' + results[i]);
+          i++;
+        }
+      }, function(error) {
+        console.log("error getting photos");
+      }, options);
     };
   }
 ]);

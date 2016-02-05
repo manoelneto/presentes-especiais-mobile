@@ -19,4 +19,27 @@ app.controller 'ProductPersonalizationCtrl', ['$scope', '$state', 'ProductServic
 
     $scope.userPersonalization.setDefault()
 
+  $scope.imagePicker = ->
+
+    console.log 'runing image picker'
+
+    options =
+      maximumImagesCount: 10
+      width: 800
+      height: 800
+      quality: 80
+
+    imagePicker.getPictures (results) ->
+      console.log results
+      i = 0
+      while i < results.length
+        console.log 'Image URI: ' + results[i]
+        i++
+      return
+    , (error) ->
+      console.log "error getting photos"
+      # error getting photos
+      return
+    , options
+
 ]

@@ -44,6 +44,12 @@ gulp.task('mobile_dev', function() {
     .pipe(gulp.dest('./www/coffee'));
 });
 
+gulp.task('real_mobile_dev', function() {
+  gulp.src('./www/coffee/config/settings.coffee')
+    .pipe(preprocess({context: { ENV: 'REAL_MOBILE_DEV', DEBUG: true}}))
+    .pipe(gulp.dest('./www/coffee'));
+});
+
 gulp.task('test_env', function() {
   gulp.src('./www/coffee/config/settings.coffee')
     .pipe(preprocess({context: { ENV: 'TEST', DEBUG: true}}))
