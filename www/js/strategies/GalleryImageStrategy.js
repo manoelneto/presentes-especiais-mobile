@@ -15,14 +15,22 @@ app.factory("GalleryImageStrategy", [
       GalleryImageStrategy.prototype.loadPicture = function() {
         return $q(function(resolve, reject) {
           return imagePicker.getPictures(function(results) {
-            var i;
-            console.log(results);
-            i = 0;
-            while (i < results.length) {
-              console.log('Image URI: ' + results[i]);
-              i++;
-            }
-            return resolve(results);
+            var encodePromises, parsedFiles;
+            parsedFiles = [];
+            encodePromises = [];
+            results.forEach(function(result) {
+              var promise;
+              promise = $q(function(r, rj) {
+                return window.plugins.Base64.encodeFile(result, function(base64) {
+                  parsedFiles.push(base64);
+                  return r();
+                });
+              });
+              return encodePromises.push(promise);
+            });
+            return $q.all(encodePromises).then(function() {
+              return resolve(parsedFiles);
+            });
           }, function(error) {
             console.log("error getting photos");
             return reject(error);

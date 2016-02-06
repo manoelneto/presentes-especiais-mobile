@@ -65,7 +65,6 @@ app.factory("AreaEdition", [
       };
 
       AreaEdition.prototype.hasData = function() {
-        console.log(!!this.picture || !!this.text);
         return !!this.picture || !!this.text;
       };
 

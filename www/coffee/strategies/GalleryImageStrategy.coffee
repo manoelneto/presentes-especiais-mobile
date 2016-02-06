@@ -13,12 +13,21 @@ app.factory "GalleryImageStrategy", [ '$q', ($q)->
     loadPicture: ->
       $q (resolve, reject) ->
         imagePicker.getPictures (results) ->
-          console.log results
-          i = 0
-          while i < results.length
-            console.log 'Image URI: ' + results[i]
-            i++
-          resolve(results)
+          parsedFiles = []
+          encodePromises = []
+
+          results.forEach (result) ->
+            promise = $q (r, rj) ->
+
+              window.plugins.Base64.encodeFile result, (base64) ->
+                parsedFiles.push base64
+                r()
+
+            encodePromises.push promise
+
+          $q.all(encodePromises).then ->
+            resolve(parsedFiles)
+
         , (error) ->
           console.log "error getting photos"
           # error getting photos

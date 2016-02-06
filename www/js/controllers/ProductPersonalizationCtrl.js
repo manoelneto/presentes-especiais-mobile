@@ -1,5 +1,5 @@
 app.controller('ProductPersonalizationCtrl', [
-  '$scope', '$state', 'ProductService', 'UserPersonalization', 'GalleryImageStrategy', '$timeout', function($scope, $state, ProductService, UserPersonalization, GalleryImageStrategy, $timeout) {
+  '$scope', '$state', 'ProductService', 'UserPersonalization', 'GalleryImageStrategy', '$timeout', '$q', function($scope, $state, ProductService, UserPersonalization, GalleryImageStrategy, $timeout, $q) {
     var createUserPersonalization, id, imagePicker;
     id = $state.params.id;
     ProductService.find(id).then(function(product) {
@@ -62,9 +62,9 @@ app.controller('ProductPersonalizationCtrl', [
     return imagePicker = function(areaEdition) {
       var galleryStrategy;
       galleryStrategy = new GalleryImageStrategy();
-      return galleryStrategy.loadPicture().then(function(picture) {
+      return galleryStrategy.loadPicture().then(function(pictures) {
         return $timeout(function() {
-          return areaEdition.setPicture(picture);
+          return areaEdition.setPicture(pictures[0]);
         });
       })["catch"](function() {
         return console.log(arguments);

@@ -48,7 +48,6 @@ app.factory "AreaEdition", [ 'Model', (Model) ->
       @text
 
     hasData: ->
-      console.log !!@picture or !!@text
       !!@picture or !!@text
 
   AreaEdition

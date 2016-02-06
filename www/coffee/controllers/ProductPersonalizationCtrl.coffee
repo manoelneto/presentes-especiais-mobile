@@ -1,6 +1,6 @@
 app.controller 'ProductPersonalizationCtrl', [
-  '$scope', '$state', 'ProductService', 'UserPersonalization', 'GalleryImageStrategy', '$timeout',
-  ($scope, $state, ProductService, UserPersonalization, GalleryImageStrategy, $timeout) ->
+  '$scope', '$state', 'ProductService', 'UserPersonalization', 'GalleryImageStrategy', '$timeout', '$q'
+  ($scope, $state, ProductService, UserPersonalization, GalleryImageStrategy, $timeout, $q) ->
     id = $state.params.id
 
     ProductService.find(id).then (product) ->
@@ -62,9 +62,9 @@ app.controller 'ProductPersonalizationCtrl', [
 
     imagePicker = (areaEdition) ->
       galleryStrategy = new GalleryImageStrategy()
-      galleryStrategy.loadPicture().then (picture) ->
+      galleryStrategy.loadPicture().then (pictures) ->
         $timeout ->
-          areaEdition.setPicture picture
+          areaEdition.setPicture pictures[0]
       .catch ->
         console.log arguments
 ]
