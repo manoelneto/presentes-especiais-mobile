@@ -1,4 +1,4 @@
-app.factory "Personalization", [ 'Model', 'Layout', (Model, Layout) ->
+app.factory "Personalization", [ 'Model', 'Layout', 'API', (Model, Layout, API) ->
 
   class Personalization extends Model
 
@@ -10,6 +10,9 @@ app.factory "Personalization", [ 'Model', 'Layout', (Model, Layout) ->
 
     getLayouts: ->
       @layouts
+
+    getBackgroundUrl: ->
+      API.base_image_url + @attributes.picture_area_bg
 
   Personalization
 ]

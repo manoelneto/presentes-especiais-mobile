@@ -11,16 +11,18 @@
     </div>
 
     <div class="molde-wrapper">
-      <img src="http://192.168.0.152:3000/uploads/personalization/picture/6/area_bg_pp.jpeg" alt="" class="personalization-molde">
+      <img src="{{ personalization.getBackgroundUrl() }}" alt="" class="personalization-molde">
 
-      <div class="personalization-area {{ areaEdition.getType() }}" style="{{ areaEdition.getCss() }}" data-ng-repeat="areaEdition in layout.getAreaEditions()" data-ng-click="loadAreaData(areaEdition)" data-ng-if="!areaEdition.hasData()">
-        <a href="#">
-          {{ areaEdition.getAreaTypeName() }}
-        </a>
+      <div class="personalization-area {{ areaEdition.getType() }}" style="{{ areaEdition.getCss() }}" data-ng-repeat="areaEdition in layout.getAreaEditions()" data-ng-click="executeProperAction(areaEdition)" data-ng-if="!areaEdition.hasData()">
+        <div class="gl-table-wrapper">
+          <div class="gl-table-cell-wrapper">
+            <img data-ng-src="{{ areaEdition.getPlaceholderIconUrl() }}" alt="" class="placeholder-icon">
+          </div>
+        </div>
       </div>
 
-      <div class="personalization-area {{ areaEdition.getType() }}" style="{{ areaEdition.getCss() }}" data-ng-repeat="areaEdition in layout.getAreaEditions()" data-ng-click="loadAreaData(areaEdition)" data-ng-if="areaEdition.hasData()">
-        <img data-ng-src="{{ areaEdition.getPicture() }}" alt="">
+      <div class="personalization-area {{ areaEdition.getType() }}" style="{{ areaEdition.getCss() }}" data-ng-repeat="areaEdition in layout.getAreaEditions()" data-ng-click="executeProperAction(areaEdition)" data-ng-if="areaEdition.hasData()">
+        <img data-ng-src="{{ areaEdition.getPicture() }}" style="width: 100%; height: 100%" alt="">
       </div>
     </div>
 

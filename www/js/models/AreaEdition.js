@@ -24,6 +24,22 @@ app.factory("AreaEdition", [
         return css;
       };
 
+      AreaEdition.prototype.getWidth = function() {
+        return this.attributes.x2 - this.attributes.x1;
+      };
+
+      AreaEdition.prototype.getHeight = function() {
+        return this.attributes.y2 - this.attributes.y1;
+      };
+
+      AreaEdition.prototype.getWidthPercent = function() {
+        return (this.getWidth() / baseSize) * 100;
+      };
+
+      AreaEdition.prototype.getHeightPercent = function() {
+        return (this.getHeight() / baseSize) * 100;
+      };
+
       AreaEdition.prototype.getAreaTypeName = function() {
         if (this.isImage()) {
           return "Imagem";
@@ -40,20 +56,28 @@ app.factory("AreaEdition", [
         return this.picture;
       };
 
+      AreaEdition.prototype.getPlaceholderIconUrl = function() {
+        if (this.isImage()) {
+          return "img/camera.png";
+        } else if (this.isText()) {
+          return "img/pencil.png";
+        }
+      };
+
       AreaEdition.prototype.getType = function() {
         if (this.isImage()) {
           return "photo";
         } else if (this.isText()) {
-          return "texto";
+          return "text";
         }
       };
 
       AreaEdition.prototype.isImage = function() {
-        return this.attributes.area_type = 'image';
+        return this.attributes.area_type === 'image';
       };
 
       AreaEdition.prototype.isText = function() {
-        return this.attributes.area_type = 'text';
+        return this.attributes.area_type === 'text';
       };
 
       AreaEdition.prototype.setText = function(text) {
@@ -65,7 +89,22 @@ app.factory("AreaEdition", [
       };
 
       AreaEdition.prototype.hasData = function() {
-        return !!this.picture || !!this.text;
+        if (this.isImage()) {
+          return !!this.picture;
+        } else if (this.isText()) {
+          return !!this.text;
+        } else {
+          return false;
+        }
+      };
+
+      AreaEdition.prototype.removeData = function() {
+        console.log("removing " + (this.getType()));
+        if (this.isImage()) {
+          return this.picture = null;
+        } else if (this.isText()) {
+          return this.text = null;
+        }
       };
 
       return AreaEdition;

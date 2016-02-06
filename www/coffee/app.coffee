@@ -2,6 +2,7 @@ window.app = angular.module('app', [
   'ionic'
   'ui.router'
   'ngOpenFB'
+  'jrCrop'
 ])
 
 app.run(($ionicPlatform, $openFB) ->

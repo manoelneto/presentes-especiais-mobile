@@ -2,12 +2,13 @@
 <html ng-app="app">
 <head>
   <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'"> -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://jsonplaceholder.typicode.com http://localhost:3000 http://192.168.57.1:3000 http://192.168.0.152:3000 http://localhost:35729 ws://localhost:35729; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:35729; frame-src *; img-src *">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://jsonplaceholder.typicode.com http://localhost:3000 http://192.168.57.1:3000 http://192.168.0.152:3000 http://localhost:35729 ws://localhost:35729 http://peb-webfac.tk; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:35729; frame-src *; img-src 'self' data: http://localhost:3000 http://192.168.57.1:3000 http://192.168.0.152:3000 https://placeholdit.imgix.net http://peb-webfac.tk">
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
   <title></title>
 
   <link href="lib/Swiper/dist/css/swiper.css" rel="stylesheet">
+  <link href="lib/jr-crop/dist/jr-crop.css" rel="stylesheet">
   <link href="css/ionic.app.css" rel="stylesheet">
 
   <script src="lib/ionic/js/ionic.bundle.js"></script>
@@ -16,6 +17,7 @@
 
   <script src="lib/ngOpenFB/ngOpenFB.js"></script>
   <script src="lib/ngOpenFB/bin/ngCordova.js"></script>
+  <script src="lib/jr-crop/src/jr-crop.js"></script>
   <script src="js/app.js"></script>
   <script src="js/settings.js"></script>
 

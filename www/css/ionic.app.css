@@ -10851,6 +10851,17 @@ ion-view {
   display: block;
 }
 
+.gl-table-wrapper {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.gl-table-cell-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
 .submit {
   display: block;
   width: 100%;
@@ -11409,6 +11420,11 @@ swiper-slider.no-slide-width .swiper-slide {
 }
 .personalization .personalization-area.text {
   background: rgba(100, 100, 100, 0.2);
+}
+.personalization .personalization-area .placeholder-icon {
+  display: block;
+  margin: 0 auto;
+  width: 40px;
 }
 .personalization .personalization-strong-button {
   display: block;

@@ -1,6 +1,6 @@
 app.controller('ProductPersonalizationCtrl', [
-  '$scope', '$state', 'ProductService', 'UserPersonalization', 'GalleryImageStrategy', '$timeout', '$q', function($scope, $state, ProductService, UserPersonalization, GalleryImageStrategy, $timeout, $q) {
-    var createUserPersonalization, id, imagePicker;
+  '$scope', '$state', 'ProductService', 'UserPersonalization', 'GalleryImageStrategy', '$timeout', '$jrCrop', '$ionicModal', function($scope, $state, ProductService, UserPersonalization, GalleryImageStrategy, $timeout, $jrCrop, $ionicModal) {
+    var createUserPersonalization, id, imagePicker, openChangeImageModal, removeModal;
     id = $state.params.id;
     ProductService.find(id).then(function(product) {
       $scope.product = product;
@@ -8,40 +8,7 @@ app.controller('ProductPersonalizationCtrl', [
     });
     createUserPersonalization = function() {
       var pThemes;
-      pThemes = [
-        {
-          id: 17,
-          name: 'Teste de tema',
-          personalizations: [
-            {
-              id: 6,
-              name: "Teste",
-              order: null,
-              picture_area_bg: "/uploads/personalization/picture/6/area_bg_pp.jpeg",
-              layouts: [
-                {
-                  id: 6,
-                  name: "teste de layout",
-                  order: null,
-                  area_editions: [
-                    {
-                      area_type: "image",
-                      id: 18,
-                      name: "imagem ao centro",
-                      order: null,
-                      required: false,
-                      x1: 138,
-                      x2: 337,
-                      y1: 109,
-                      y2: 263
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ];
+      pThemes = $scope.product.getThemes();
       $scope.userPersonalization = new UserPersonalization(pThemes);
       $scope.userPersonalization.onChange('personalization', function(personalization) {
         return $scope.personalization = personalization;
@@ -54,17 +21,69 @@ app.controller('ProductPersonalizationCtrl', [
       });
       return $scope.userPersonalization.setDefault();
     };
-    $scope.loadAreaData = function(areaEdition) {
+    openChangeImageModal = function(areaEdition) {
+      $scope.modalItem = areaEdition;
+      return $ionicModal.fromTemplateUrl('templates/modals/personalization-change-image.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+      }).then(function(modal) {
+        $scope.modal = modal;
+        return modal.show();
+      });
+    };
+    $scope.executeProperAction = function(areaEdition) {
       if (areaEdition.isImage()) {
+        if (areaEdition.hasData()) {
+          return openChangeImageModal(areaEdition);
+        } else {
+          return imagePicker(areaEdition);
+        }
+      }
+    };
+    $scope.modalChange = function() {
+      var areaEdition;
+      areaEdition = $scope.modalItem;
+      if (areaEdition.isImage()) {
+        $scope.modal.remove();
         return imagePicker(areaEdition);
       }
     };
+    $scope.modalRemove = function() {
+      var areaEdition;
+      areaEdition = $scope.modalItem;
+      areaEdition.removeData();
+      return $scope.modal.remove();
+    };
+    removeModal = function() {
+      return $scope.modal.remove();
+    };
+    $scope.modalCancel = removeModal;
+    $scope.$on('$destroy', function() {
+      return removeModal();
+    });
     return imagePicker = function(areaEdition) {
       var galleryStrategy;
+      if (!window.imagePicker) {
+        areaEdition.setPicture('https://placeholdit.imgix.net/~text?txtsize=23&bg=bada55&txt=500%C3%97500&w=500&h=500');
+        return;
+      }
       galleryStrategy = new GalleryImageStrategy();
       return galleryStrategy.loadPicture().then(function(pictures) {
-        return $timeout(function() {
-          return areaEdition.setPicture(pictures[0]);
+        if (pictures.length === 0) {
+          return false;
+        }
+        return $jrCrop.crop({
+          url: pictures[0],
+          width: areaEdition.getWidth(),
+          height: areaEdition.getHeight(),
+          title: 'Corte sua imagem'
+        }).then(function(canvas) {
+          return $timeout(function() {
+            return areaEdition.setPicture(canvas.toDataURL());
+          });
+        }, function() {
+          console.log('some error');
+          return console.log(arguments);
         });
       })["catch"](function() {
         return console.log(arguments);

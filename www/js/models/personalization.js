@@ -2,7 +2,7 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 app.factory("Personalization", [
-  'Model', 'Layout', function(Model, Layout) {
+  'Model', 'Layout', 'API', function(Model, Layout, API) {
     var Personalization;
     Personalization = (function(superClass) {
       extend(Personalization, superClass);
@@ -16,6 +16,10 @@ app.factory("Personalization", [
 
       Personalization.prototype.getLayouts = function() {
         return this.layouts;
+      };
+
+      Personalization.prototype.getBackgroundUrl = function() {
+        return API.base_image_url + this.attributes.picture_area_bg;
       };
 
       return Personalization;
