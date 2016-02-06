@@ -13,10 +13,14 @@
     <div class="molde-wrapper">
       <img src="http://192.168.0.152:3000/uploads/personalization/picture/6/area_bg_pp.jpeg" alt="" class="personalization-molde">
 
-      <div class="personalization-area photo" style="{{ areaEdition.getCss() }}" data-ng-repeat="areaEdition in layout.getAreaEditions()" data-ng-click="imagePicker()">
+      <div class="personalization-area {{ areaEdition.getType() }}" style="{{ areaEdition.getCss() }}" data-ng-repeat="areaEdition in layout.getAreaEditions()" data-ng-click="loadAreaData(areaEdition)" data-ng-if="!areaEdition.hasData()">
         <a href="#">
           {{ areaEdition.getAreaTypeName() }}
         </a>
+      </div>
+
+      <div class="personalization-area {{ areaEdition.getType() }}" style="{{ areaEdition.getCss() }}" data-ng-repeat="areaEdition in layout.getAreaEditions()" data-ng-click="loadAreaData(areaEdition)" data-ng-if="areaEdition.hasData()">
+        <img data-ng-src="{{ areaEdition.getPicture() }}" alt="">
       </div>
     </div>
 

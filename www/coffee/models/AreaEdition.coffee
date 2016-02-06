@@ -4,6 +4,12 @@ app.factory "AreaEdition", [ 'Model', (Model) ->
 
   class AreaEdition extends Model
 
+    constructor: ->
+      super
+
+      @setPicture @attributes.picture
+      @setText @attributes.text
+
     getCss: ->
       a = @attributes
       css = "top: #{a.y1 / baseSizePercent}%; left: #{a.x1 / baseSizePercent}%;"
@@ -12,10 +18,38 @@ app.factory "AreaEdition", [ 'Model', (Model) ->
       css
 
     getAreaTypeName: ->
-      if @attributes.area_type == 'image'
+      if @isImage()
         "Imagem"
-      else
+      else if @isText()
         "Texto"
+
+    setPicture: (picture) ->
+      @picture = picture
+
+    getPicture: ->
+      @picture
+
+    getType: ->
+      if @isImage()
+        "photo"
+      else if @isText()
+        "texto"
+
+    isImage: ->
+      @attributes.area_type = 'image'
+
+    isText: ->
+      @attributes.area_type = 'text'
+
+    setText: (text) ->
+      @text = text
+
+    getText: ->
+      @text
+
+    hasData: ->
+      console.log !!@picture or !!@text
+      !!@picture or !!@text
 
   AreaEdition
 

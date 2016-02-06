@@ -10,7 +10,9 @@ app.factory("AreaEdition", [
       extend(AreaEdition, superClass);
 
       function AreaEdition() {
-        return AreaEdition.__super__.constructor.apply(this, arguments);
+        AreaEdition.__super__.constructor.apply(this, arguments);
+        this.setPicture(this.attributes.picture);
+        this.setText(this.attributes.text);
       }
 
       AreaEdition.prototype.getCss = function() {
@@ -23,11 +25,48 @@ app.factory("AreaEdition", [
       };
 
       AreaEdition.prototype.getAreaTypeName = function() {
-        if (this.attributes.area_type === 'image') {
+        if (this.isImage()) {
           return "Imagem";
-        } else {
+        } else if (this.isText()) {
           return "Texto";
         }
+      };
+
+      AreaEdition.prototype.setPicture = function(picture) {
+        return this.picture = picture;
+      };
+
+      AreaEdition.prototype.getPicture = function() {
+        return this.picture;
+      };
+
+      AreaEdition.prototype.getType = function() {
+        if (this.isImage()) {
+          return "photo";
+        } else if (this.isText()) {
+          return "texto";
+        }
+      };
+
+      AreaEdition.prototype.isImage = function() {
+        return this.attributes.area_type = 'image';
+      };
+
+      AreaEdition.prototype.isText = function() {
+        return this.attributes.area_type = 'text';
+      };
+
+      AreaEdition.prototype.setText = function(text) {
+        return this.text = text;
+      };
+
+      AreaEdition.prototype.getText = function() {
+        return this.text;
+      };
+
+      AreaEdition.prototype.hasData = function() {
+        console.log(!!this.picture || !!this.text);
+        return !!this.picture || !!this.text;
       };
 
       return AreaEdition;
