@@ -7,6 +7,9 @@ app.factory 'UserPersonalization', ['Utils', 'Theme', (Utils, Theme) ->
         new Theme(theme)
       @listeners = []
 
+    getThemes: ->
+      @themes
+
     onChange: (item, callback) ->
       @listeners.push item: item, callback: callback
 

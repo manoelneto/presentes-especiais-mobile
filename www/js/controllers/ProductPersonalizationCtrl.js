@@ -97,6 +97,14 @@ app.controller('ProductPersonalizationCtrl', [
         return 'active';
       }
     };
+    $scope.setTheme = function(theme) {
+      $scope.state = new PersonalizationState();
+      return $scope.userPersonalization.setTheme(theme);
+    };
+    $scope.setLayout = function(layout) {
+      $scope.state = new PersonalizationState();
+      return $scope.userPersonalization.setLayout(layout);
+    };
     ProductService.find(id).then(function(product) {
       $scope.product = product;
       return createUserPersonalization();

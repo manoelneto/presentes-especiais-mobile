@@ -54,6 +54,13 @@ app.controller 'ProductPersonalizationCtrl', [
       if $scope.state.getSection() == 'theme'
         return 'active'
 
+    $scope.setTheme = (theme) ->
+      $scope.state = new PersonalizationState()
+      $scope.userPersonalization.setTheme(theme)
+
+    $scope.setLayout = (layout) ->
+      $scope.state = new PersonalizationState()
+      $scope.userPersonalization.setLayout(layout)
 
     ProductService.find(id).then (product) ->
       $scope.product = product

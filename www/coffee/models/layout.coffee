@@ -11,5 +11,8 @@ app.factory "Layout", [ 'Model', 'AreaEdition', (Model, AreaEdition) ->
     getAreaEditions: ->
       @area_editions
 
+    getName: ->
+      @attributes.name
+
   Layout
 ]

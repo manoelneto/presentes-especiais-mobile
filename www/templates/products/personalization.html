@@ -47,11 +47,19 @@
     </div>
 
     <div data-ng-if="state.getSection() == 'theme'">
-      lista de temas aqui
+      <div data-ng-repeat="theme in userPersonalization.getThemes()">
+        <a href="javascript://" class="theme" data-ng-click="setTheme(theme)">
+          Choose theme: {{ theme.getName() }}
+        </a>
+      </div>
     </div>
 
     <div data-ng-if="state.getSection() == 'layout'">
-      lista de layouts
+      <div data-ng-repeat="layout in personalization.getLayouts()">
+        <a href="javascript://" class="layout" data-ng-click="setLayout(layout)">
+          Choose layout: {{ layout.getName() }}
+        </a>
+      </div>
     </div>
 
 

@@ -18,6 +18,10 @@ app.factory("Theme", [
         return this.personalizations;
       };
 
+      Theme.prototype.getName = function() {
+        return this.attributes.name;
+      };
+
       return Theme;
 
     })(Model);

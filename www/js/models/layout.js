@@ -18,6 +18,10 @@ app.factory("Layout", [
         return this.area_editions;
       };
 
+      Layout.prototype.getName = function() {
+        return this.attributes.name;
+      };
+
       return Layout;
 
     })(Model);

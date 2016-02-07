@@ -9,6 +9,10 @@ app.factory('UserPersonalization', [
         this.listeners = [];
       }
 
+      UserPersonalization.prototype.getThemes = function() {
+        return this.themes;
+      };
+
       UserPersonalization.prototype.onChange = function(item, callback) {
         return this.listeners.push({
           item: item,
