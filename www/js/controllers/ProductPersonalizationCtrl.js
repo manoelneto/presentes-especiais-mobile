@@ -1,7 +1,102 @@
+var LayoutState, PersonalizationState, State, ThemeState,
+  extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty;
+
+State = (function() {
+  function State() {}
+
+  State.prototype.getSection = function() {
+    return this.section;
+  };
+
+  return State;
+
+})();
+
+PersonalizationState = (function(superClass) {
+  extend(PersonalizationState, superClass);
+
+  function PersonalizationState() {
+    return PersonalizationState.__super__.constructor.apply(this, arguments);
+  }
+
+  PersonalizationState.prototype.section = 'personalization';
+
+  PersonalizationState.prototype.clickLayoutButton = function() {
+    return new LayoutState();
+  };
+
+  PersonalizationState.prototype.clickThemeButton = function() {
+    return new ThemeState();
+  };
+
+  return PersonalizationState;
+
+})(State);
+
+LayoutState = (function(superClass) {
+  extend(LayoutState, superClass);
+
+  function LayoutState() {
+    return LayoutState.__super__.constructor.apply(this, arguments);
+  }
+
+  LayoutState.prototype.section = 'layout';
+
+  LayoutState.prototype.clickLayoutButton = function() {
+    return new PersonalizationState();
+  };
+
+  LayoutState.prototype.clickThemeButton = function() {
+    return new ThemeState();
+  };
+
+  return LayoutState;
+
+})(State);
+
+ThemeState = (function(superClass) {
+  extend(ThemeState, superClass);
+
+  function ThemeState() {
+    return ThemeState.__super__.constructor.apply(this, arguments);
+  }
+
+  ThemeState.prototype.section = 'theme';
+
+  ThemeState.prototype.clickLayoutButton = function() {
+    return new LayoutState();
+  };
+
+  ThemeState.prototype.clickThemeButton = function() {
+    return new PersonalizationState();
+  };
+
+  return ThemeState;
+
+})(State);
+
 app.controller('ProductPersonalizationCtrl', [
-  '$scope', '$state', 'ProductService', 'UserPersonalization', 'GalleryImageStrategy', '$timeout', '$jrCrop', '$ionicModal', function($scope, $state, ProductService, UserPersonalization, GalleryImageStrategy, $timeout, $jrCrop, $ionicModal) {
+  '$scope', '$state', 'ProductService', 'UserPersonalization', 'GalleryImageStrategy', '$timeout', '$jrCrop', '$ionicModal', 'PersonalizationShare', function($scope, $state, ProductService, UserPersonalization, GalleryImageStrategy, $timeout, $jrCrop, $ionicModal, PersonalizationShare) {
     var createUserPersonalization, id, imagePicker, openChangeImageModal, removeModal;
     id = $state.params.id;
+    $scope.state = new PersonalizationState();
+    $scope.chooseLayout = function() {
+      return $scope.state = $scope.state.clickLayoutButton();
+    };
+    $scope.chooseTheme = function() {
+      return $scope.state = $scope.state.clickThemeButton();
+    };
+    $scope.layoutButtonClass = function() {
+      if ($scope.state.getSection() === 'layout') {
+        return 'active';
+      }
+    };
+    $scope.themeButtonClass = function() {
+      if ($scope.state.getSection() === 'theme') {
+        return 'active';
+      }
+    };
     ProductService.find(id).then(function(product) {
       $scope.product = product;
       return createUserPersonalization();
@@ -30,6 +125,30 @@ app.controller('ProductPersonalizationCtrl', [
         $scope.modal = modal;
         return modal.show();
       });
+    };
+    $scope.prevPersonalization = function() {
+      return $scope.userPersonalization.setPrevPersonalization($scope.personalization);
+    };
+    $scope.nextPersonalization = function() {
+      return $scope.userPersonalization.setNextPersonalization($scope.personalization);
+    };
+    $scope.showPrevButton = function() {
+      if ($scope.userPersonalization) {
+        return !$scope.userPersonalization.isFirstPersonalization($scope.personalization);
+      }
+      return false;
+    };
+    $scope.showNextButton = function() {
+      if ($scope.userPersonalization) {
+        return !$scope.userPersonalization.isLastPersonalization($scope.personalization);
+      }
+      return false;
+    };
+    $scope.showCompleteButton = function() {
+      if ($scope.userPersonalization) {
+        return $scope.userPersonalization.isLastPersonalization($scope.personalization);
+      }
+      return false;
     };
     $scope.executeProperAction = function(areaEdition) {
       if (areaEdition.isImage()) {

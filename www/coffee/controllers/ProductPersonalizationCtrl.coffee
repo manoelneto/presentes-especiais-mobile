@@ -1,7 +1,59 @@
+class State
+
+  getSection: ->
+    @section
+
+class PersonalizationState extends State
+
+  section: 'personalization'
+
+  clickLayoutButton: ->
+    new LayoutState()
+
+  clickThemeButton: ->
+    new ThemeState()
+
+class LayoutState extends State
+
+  section: 'layout'
+
+  clickLayoutButton: ->
+    new PersonalizationState()
+
+  clickThemeButton: ->
+    new ThemeState()
+
+class ThemeState extends State
+
+  section: 'theme'
+
+  clickLayoutButton: ->
+    new LayoutState()
+
+  clickThemeButton: ->
+    new PersonalizationState()
+
 app.controller 'ProductPersonalizationCtrl', [
-  '$scope', '$state', 'ProductService', 'UserPersonalization', 'GalleryImageStrategy', '$timeout', '$jrCrop', '$ionicModal',
-  ($scope, $state, ProductService, UserPersonalization, GalleryImageStrategy, $timeout, $jrCrop, $ionicModal) ->
+  '$scope', '$state', 'ProductService', 'UserPersonalization', 'GalleryImageStrategy', '$timeout', '$jrCrop', '$ionicModal', 'PersonalizationShare',
+  ($scope, $state, ProductService, UserPersonalization, GalleryImageStrategy, $timeout, $jrCrop, $ionicModal, PersonalizationShare) ->
     id = $state.params.id
+
+    $scope.state = new PersonalizationState()
+
+    $scope.chooseLayout = ->
+      $scope.state = $scope.state.clickLayoutButton()
+
+    $scope.chooseTheme = ->
+      $scope.state = $scope.state.clickThemeButton()
+
+    $scope.layoutButtonClass = ->
+      if $scope.state.getSection() == 'layout'
+        return 'active'
+
+    $scope.themeButtonClass = ->
+      if $scope.state.getSection() == 'theme'
+        return 'active'
+
 
     ProductService.find(id).then (product) ->
       $scope.product = product
@@ -77,6 +129,28 @@ app.controller 'ProductPersonalizationCtrl', [
         $scope.modal = modal
         modal.show()
 
+    $scope.prevPersonalization = ->
+      $scope.userPersonalization.setPrevPersonalization($scope.personalization)
+
+    $scope.nextPersonalization = ->
+      $scope.userPersonalization.setNextPersonalization($scope.personalization)
+
+    $scope.showPrevButton = ->
+      if $scope.userPersonalization
+        return not $scope.userPersonalization.isFirstPersonalization($scope.personalization)
+
+      return false
+
+    $scope.showNextButton = ->
+      if $scope.userPersonalization
+        return not $scope.userPersonalization.isLastPersonalization($scope.personalization)
+
+      return false
+
+    $scope.showCompleteButton = ->
+      if $scope.userPersonalization
+        return $scope.userPersonalization.isLastPersonalization($scope.personalization)
+      return false
 
     $scope.executeProperAction = (areaEdition) ->
       if areaEdition.isImage()

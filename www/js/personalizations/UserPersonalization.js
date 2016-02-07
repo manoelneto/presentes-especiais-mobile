@@ -23,7 +23,14 @@ app.factory('UserPersonalization', [
 
       UserPersonalization.prototype.setPersonalization = function(personalization) {
         this.personalization = personalization;
-        return this.notifyListeners('personalization', personalization);
+        this.setLayout(this.personalization.getLayouts()[0]);
+        this.notifyListeners('personalization', personalization);
+        return this.notifyListeners('layout', this.layout);
+      };
+
+      UserPersonalization.prototype.setPersonalizations = function(personalizations) {
+        this.personalizations = personalizations;
+        return this.notifyListeners('personalizations', personalizations);
       };
 
       UserPersonalization.prototype.setLayout = function(layout) {
@@ -32,9 +39,43 @@ app.factory('UserPersonalization', [
       };
 
       UserPersonalization.prototype.setDefault = function() {
+        var orderedPersonalizations;
         this.setTheme(this.themes[0]);
         this.setPersonalization(this.theme.getPersonalizations()[0]);
-        return this.setLayout(this.personalization.getLayouts()[0]);
+        orderedPersonalizations = this.theme.personalizations;
+        return this.setPersonalizations(orderedPersonalizations);
+      };
+
+      UserPersonalization.prototype.isLastPersonalization = function(personalization) {
+        if (this.personalizations) {
+          return this.personalizations[this.personalizations.length - 1] === personalization;
+        }
+        return false;
+      };
+
+      UserPersonalization.prototype.isFirstPersonalization = function(personalization) {
+        if (this.personalizations) {
+          return this.personalizations[0] === personalization;
+        }
+        return false;
+      };
+
+      UserPersonalization.prototype.setPrevPersonalization = function(currentPersonalization) {
+        var nextIndex;
+        nextIndex = this.personalizations.indexOf(currentPersonalization) - 1;
+        if (nextIndex < 0) {
+          nextIndex = 0;
+        }
+        return this.setPersonalization(this.personalizations[nextIndex]);
+      };
+
+      UserPersonalization.prototype.setNextPersonalization = function(currentPersonalization) {
+        var nextIndex;
+        nextIndex = this.personalizations.indexOf(currentPersonalization) + 1;
+        if (nextIndex > this.personalizations.length) {
+          nextIndex = this.personalizations.length;
+        }
+        return this.setPersonalization(this.personalizations[nextIndex]);
       };
 
       UserPersonalization.prototype.notifyListeners = function(item, object) {

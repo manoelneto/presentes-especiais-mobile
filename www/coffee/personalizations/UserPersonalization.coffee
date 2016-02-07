@@ -16,7 +16,13 @@ app.factory 'UserPersonalization', ['Utils', 'Theme', (Utils, Theme) ->
 
     setPersonalization: (personalization) ->
       @personalization = personalization
+      @setLayout @personalization.getLayouts()[0]
       @notifyListeners 'personalization', personalization
+      @notifyListeners 'layout', @layout
+
+    setPersonalizations: (personalizations) ->
+      @personalizations = personalizations
+      @notifyListeners 'personalizations', personalizations
 
     setLayout: (layout) ->
       @layout = layout
@@ -26,7 +32,36 @@ app.factory 'UserPersonalization', ['Utils', 'Theme', (Utils, Theme) ->
       # Utils.sortByKey @themes, 'default'
       @setTheme @themes[0]
       @setPersonalization @theme.getPersonalizations()[0]
-      @setLayout @personalization.getLayouts()[0]
+      orderedPersonalizations = @theme.personalizations
+      @setPersonalizations orderedPersonalizations
+
+    isLastPersonalization: (personalization) ->
+      if @personalizations
+        return @personalizations[@personalizations.length - 1] == personalization
+
+      return false
+
+    isFirstPersonalization: (personalization) ->
+      if @personalizations
+        return @personalizations[0] == personalization
+
+      return false
+
+    setPrevPersonalization: (currentPersonalization) ->
+      nextIndex = @personalizations.indexOf(currentPersonalization) - 1
+
+      if nextIndex < 0
+        nextIndex = 0
+
+      @setPersonalization @personalizations[nextIndex]
+
+    setNextPersonalization: (currentPersonalization) ->
+      nextIndex = @personalizations.indexOf(currentPersonalization) + 1
+
+      if nextIndex > @personalizations.length
+        nextIndex = @personalizations.length
+
+      @setPersonalization @personalizations[nextIndex]
 
     notifyListeners: (item, object) ->
       @listeners.filter (listener) ->
