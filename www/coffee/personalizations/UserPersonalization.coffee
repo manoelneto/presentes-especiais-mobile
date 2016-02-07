@@ -3,6 +3,7 @@ app.factory 'UserPersonalization', ['Utils', 'Theme', (Utils, Theme) ->
   class UserPersonalization
 
     constructor: (themes) ->
+      @personalizations_layout = {}
       @themes = themes.map (theme) ->
         new Theme(theme)
       @listeners = []
@@ -17,26 +18,39 @@ app.factory 'UserPersonalization', ['Utils', 'Theme', (Utils, Theme) ->
       @theme = theme
       @notifyListeners 'theme', theme
 
+      @setPersonalization @theme.getPersonalizations()[0]
+      orderedPersonalizations = @theme.personalizations
+      @setPersonalizations orderedPersonalizations
+
+    hasInternalLayoutFor: (personalization) ->
+      !! @getSetedLayoutFor personalization
+
+    getSetedLayoutFor: (personalization) ->
+      @personalizations_layout[personalization.getId()]
+
+    setInternalLayoutForPersonalization: (personalization, layout) ->
+      @personalizations_layout[personalization.getId()] = layout
+
     setPersonalization: (personalization) ->
       @personalization = personalization
-      @setLayout @personalization.getLayouts()[0]
       @notifyListeners 'personalization', personalization
-      @notifyListeners 'layout', @layout
+      if not @hasInternalLayoutFor @personalization
+        @setLayout @personalization, @personalization.getLayouts()[0]
+      else
+        @setLayout @personalization, @getSetedLayoutFor(@personalization)
 
     setPersonalizations: (personalizations) ->
       @personalizations = personalizations
       @notifyListeners 'personalizations', personalizations
 
-    setLayout: (layout) ->
+    setLayout: (personalization, layout) ->
+      @setInternalLayoutForPersonalization personalization, layout
       @layout = layout
       @notifyListeners 'layout', layout
 
     setDefault: ->
       # Utils.sortByKey @themes, 'default'
       @setTheme @themes[0]
-      @setPersonalization @theme.getPersonalizations()[0]
-      orderedPersonalizations = @theme.personalizations
-      @setPersonalizations orderedPersonalizations
 
     isLastPersonalization: (personalization) ->
       if @personalizations

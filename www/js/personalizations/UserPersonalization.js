@@ -3,6 +3,7 @@ app.factory('UserPersonalization', [
     var UserPersonalization;
     UserPersonalization = (function() {
       function UserPersonalization(themes) {
+        this.personalizations_layout = {};
         this.themes = themes.map(function(theme) {
           return new Theme(theme);
         });
@@ -21,15 +22,34 @@ app.factory('UserPersonalization', [
       };
 
       UserPersonalization.prototype.setTheme = function(theme) {
+        var orderedPersonalizations;
         this.theme = theme;
-        return this.notifyListeners('theme', theme);
+        this.notifyListeners('theme', theme);
+        this.setPersonalization(this.theme.getPersonalizations()[0]);
+        orderedPersonalizations = this.theme.personalizations;
+        return this.setPersonalizations(orderedPersonalizations);
+      };
+
+      UserPersonalization.prototype.hasInternalLayoutFor = function(personalization) {
+        return !!this.getSetedLayoutFor(personalization);
+      };
+
+      UserPersonalization.prototype.getSetedLayoutFor = function(personalization) {
+        return this.personalizations_layout[personalization.getId()];
+      };
+
+      UserPersonalization.prototype.setInternalLayoutForPersonalization = function(personalization, layout) {
+        return this.personalizations_layout[personalization.getId()] = layout;
       };
 
       UserPersonalization.prototype.setPersonalization = function(personalization) {
         this.personalization = personalization;
-        this.setLayout(this.personalization.getLayouts()[0]);
         this.notifyListeners('personalization', personalization);
-        return this.notifyListeners('layout', this.layout);
+        if (!this.hasInternalLayoutFor(this.personalization)) {
+          return this.setLayout(this.personalization, this.personalization.getLayouts()[0]);
+        } else {
+          return this.setLayout(this.personalization, this.getSetedLayoutFor(this.personalization));
+        }
       };
 
       UserPersonalization.prototype.setPersonalizations = function(personalizations) {
@@ -37,17 +57,14 @@ app.factory('UserPersonalization', [
         return this.notifyListeners('personalizations', personalizations);
       };
 
-      UserPersonalization.prototype.setLayout = function(layout) {
+      UserPersonalization.prototype.setLayout = function(personalization, layout) {
+        this.setInternalLayoutForPersonalization(personalization, layout);
         this.layout = layout;
         return this.notifyListeners('layout', layout);
       };
 
       UserPersonalization.prototype.setDefault = function() {
-        var orderedPersonalizations;
-        this.setTheme(this.themes[0]);
-        this.setPersonalization(this.theme.getPersonalizations()[0]);
-        orderedPersonalizations = this.theme.personalizations;
-        return this.setPersonalizations(orderedPersonalizations);
+        return this.setTheme(this.themes[0]);
       };
 
       UserPersonalization.prototype.isLastPersonalization = function(personalization) {

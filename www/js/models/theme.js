@@ -22,6 +22,10 @@ app.factory("Theme", [
         return this.attributes.name;
       };
 
+      Theme.prototype.getId = function() {
+        return this.attributes.id;
+      };
+
       return Theme;
 
     })(Model);

@@ -14,5 +14,8 @@ app.factory "Theme", [ 'Model', 'Personalization', (Model, Personalization) ->
     getName: ->
       @attributes.name
 
+    getId: ->
+      @attributes.id
+
   Theme
 ]

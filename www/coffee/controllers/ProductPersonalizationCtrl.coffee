@@ -60,7 +60,7 @@ app.controller 'ProductPersonalizationCtrl', [
 
     $scope.setLayout = (layout) ->
       $scope.state = new PersonalizationState()
-      $scope.userPersonalization.setLayout(layout)
+      $scope.userPersonalization.setLayout($scope.personalization, layout)
 
     ProductService.find(id).then (product) ->
       $scope.product = product

@@ -103,7 +103,7 @@ app.controller('ProductPersonalizationCtrl', [
     };
     $scope.setLayout = function(layout) {
       $scope.state = new PersonalizationState();
-      return $scope.userPersonalization.setLayout(layout);
+      return $scope.userPersonalization.setLayout($scope.personalization, layout);
     };
     ProductService.find(id).then(function(product) {
       $scope.product = product;
