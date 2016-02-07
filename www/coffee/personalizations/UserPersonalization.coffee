@@ -2,8 +2,26 @@ app.factory 'UserPersonalization', ['Utils', 'Theme', (Utils, Theme) ->
 
   class UserPersonalization
 
+    hasCompleted: ->
+      completed = true
+      @theme.getPersonalizations().forEach (personalization) =>
+        if @hasInternalLayoutFor personalization
+          layout = @getInternalLayout personalization
+        else
+          layout = personalization.getLayouts()[0]
+
+        console.dir layout
+
+        layout.getAreaEditions().forEach (areaEdition) =>
+          if areaEdition.isRequired() and not @hasData(areaEdition)
+            completed = false
+
+      completed
+
+
     constructor: (themes) ->
       @personalizations_layout = {}
+      @areaEditionData = {}
       @themes = themes.map (theme) ->
         new Theme(theme)
       @listeners = []
@@ -23,9 +41,9 @@ app.factory 'UserPersonalization', ['Utils', 'Theme', (Utils, Theme) ->
       @setPersonalizations orderedPersonalizations
 
     hasInternalLayoutFor: (personalization) ->
-      !! @getSetedLayoutFor personalization
+      !! @getInternalLayout personalization
 
-    getSetedLayoutFor: (personalization) ->
+    getInternalLayout: (personalization) ->
       @personalizations_layout[personalization.getId()]
 
     setInternalLayoutForPersonalization: (personalization, layout) ->
@@ -37,7 +55,7 @@ app.factory 'UserPersonalization', ['Utils', 'Theme', (Utils, Theme) ->
       if not @hasInternalLayoutFor @personalization
         @setLayout @personalization, @personalization.getLayouts()[0]
       else
-        @setLayout @personalization, @getSetedLayoutFor(@personalization)
+        @setLayout @personalization, @getInternalLayout(@personalization)
 
     setPersonalizations: (personalizations) ->
       @personalizations = personalizations
@@ -86,6 +104,17 @@ app.factory 'UserPersonalization', ['Utils', 'Theme', (Utils, Theme) ->
       .forEach (listener) ->
         listener.callback object
 
+    setData: (areaEdition, data) ->
+      @areaEditionData[areaEdition.getId()] = data
+
+    getData: (areaEdition) ->
+      @areaEditionData[areaEdition.getId()]
+
+    hasData: (areaEdition) ->
+      !!@getData(areaEdition)
+
+    removeData: (areaEdition) ->
+      @areaEditionData[areaEdition.getId()] = null
 
   UserPersonalization
 

@@ -11,8 +11,6 @@ app.factory("AreaEdition", [
 
       function AreaEdition() {
         AreaEdition.__super__.constructor.apply(this, arguments);
-        this.setPicture(this.attributes.picture);
-        this.setText(this.attributes.text);
       }
 
       AreaEdition.prototype.getCss = function() {
@@ -22,6 +20,10 @@ app.factory("AreaEdition", [
         css = css + " width: " + ((a.x2 - a.x1) / baseSizePercent) + "%;";
         css = css + " height: " + ((a.y2 - a.y1) / baseSizePercent) + "%;";
         return css;
+      };
+
+      AreaEdition.prototype.getId = function() {
+        return this.attributes.id;
       };
 
       AreaEdition.prototype.getWidth = function() {
@@ -48,14 +50,6 @@ app.factory("AreaEdition", [
         }
       };
 
-      AreaEdition.prototype.setPicture = function(picture) {
-        return this.picture = picture;
-      };
-
-      AreaEdition.prototype.getPicture = function() {
-        return this.picture;
-      };
-
       AreaEdition.prototype.getPlaceholderIconUrl = function() {
         if (this.isImage()) {
           return "img/camera.png";
@@ -80,31 +74,8 @@ app.factory("AreaEdition", [
         return this.attributes.area_type === 'text';
       };
 
-      AreaEdition.prototype.setText = function(text) {
-        return this.text = text;
-      };
-
-      AreaEdition.prototype.getText = function() {
-        return this.text;
-      };
-
-      AreaEdition.prototype.hasData = function() {
-        if (this.isImage()) {
-          return !!this.picture;
-        } else if (this.isText()) {
-          return !!this.text;
-        } else {
-          return false;
-        }
-      };
-
-      AreaEdition.prototype.removeData = function() {
-        console.log("removing " + (this.getType()));
-        if (this.isImage()) {
-          return this.picture = null;
-        } else if (this.isText()) {
-          return this.text = null;
-        }
+      AreaEdition.prototype.isRequired = function() {
+        return this.attributes.required;
       };
 
       return AreaEdition;

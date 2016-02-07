@@ -7,16 +7,15 @@ app.factory "AreaEdition", [ 'Model', (Model) ->
     constructor: ->
       super
 
-      @setPicture @attributes.picture
-      @setText @attributes.text
-
-
     getCss: ->
       a = @attributes
       css = "top: #{a.y1 / baseSizePercent}%; left: #{a.x1 / baseSizePercent}%;"
       css = "#{css} width: #{(a.x2 - a.x1) / baseSizePercent}%;"
       css = "#{css} height: #{(a.y2 - a.y1) / baseSizePercent}%;"
       css
+
+    getId: ->
+      @attributes.id
 
     getWidth: ->
       @attributes.x2 -  @attributes.x1
@@ -36,12 +35,6 @@ app.factory "AreaEdition", [ 'Model', (Model) ->
       else if @isText()
         "Texto"
 
-    setPicture: (picture) ->
-      @picture = picture
-
-    getPicture: ->
-      @picture
-
     getPlaceholderIconUrl: ->
       if @isImage()
         "img/camera.png"
@@ -60,26 +53,8 @@ app.factory "AreaEdition", [ 'Model', (Model) ->
     isText: ->
       @attributes.area_type == 'text'
 
-    setText: (text) ->
-      @text = text
-
-    getText: ->
-      @text
-
-    hasData: ->
-      if @isImage()
-        !!@picture
-      else if @isText()
-        !!@text
-      else
-        false
-
-    removeData: ->
-      console.log "removing #{@getType()}"
-      if @isImage()
-        @picture = null
-      else if @isText()
-        @text = null
+    isRequired: ->
+      @attributes.required
 
   AreaEdition
 

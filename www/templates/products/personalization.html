@@ -7,14 +7,14 @@
 
   <ion-content class="white-content has-header">
     <div class="product-name">
-      {{ product.getName() }}
+      {{ product.getName() }} {{ userPersonalization.hasCompleted() }}
     </div>
 
     <div data-ng-if="state.getSection() == 'personalization'">
       <div class="molde-wrapper">
         <img data-ng-src="{{ personalization.getBackgroundUrl() }}" alt="" class="personalization-molde">
 
-        <div class="personalization-area {{ areaEdition.getType() }}" style="{{ areaEdition.getCss() }}" data-ng-repeat="areaEdition in layout.getAreaEditions()" data-ng-click="executeProperAction(areaEdition)" data-ng-if="!areaEdition.hasData()">
+        <div class="personalization-area {{ areaEdition.getType() }}" style="{{ areaEdition.getCss() }}" data-ng-repeat="areaEdition in layout.getAreaEditions()" data-ng-click="executeProperAction(areaEdition)" data-ng-if="!userPersonalization.hasData(areaEdition)">
           <div class="gl-table-wrapper">
             <div class="gl-table-cell-wrapper">
               <img data-ng-src="{{ areaEdition.getPlaceholderIconUrl() }}" alt="" class="placeholder-icon">
@@ -22,8 +22,8 @@
           </div>
         </div>
 
-        <div class="personalization-area {{ areaEdition.getType() }}" style="{{ areaEdition.getCss() }}" data-ng-repeat="areaEdition in layout.getAreaEditions()" data-ng-click="executeProperAction(areaEdition)" data-ng-if="areaEdition.hasData()">
-          <img data-ng-src="{{ areaEdition.getPicture() }}" style="width: 100%; height: 100%" alt="">
+        <div class="personalization-area {{ areaEdition.getType() }}" style="{{ areaEdition.getCss() }}" data-ng-repeat="areaEdition in layout.getAreaEditions()" data-ng-click="executeProperAction(areaEdition)" data-ng-if="userPersonalization.hasData(areaEdition)">
+          <img data-ng-src="{{ userPersonalization.getData(areaEdition) }}" style="width: 100%; height: 100%" alt="" data-ng-if="areaEdition.isImage()">
         </div>
       </div>
 

@@ -2,8 +2,31 @@ app.factory('UserPersonalization', [
   'Utils', 'Theme', function(Utils, Theme) {
     var UserPersonalization;
     UserPersonalization = (function() {
+      UserPersonalization.prototype.hasCompleted = function() {
+        var completed;
+        completed = true;
+        this.theme.getPersonalizations().forEach((function(_this) {
+          return function(personalization) {
+            var layout;
+            if (_this.hasInternalLayoutFor(personalization)) {
+              layout = _this.getInternalLayout(personalization);
+            } else {
+              layout = personalization.getLayouts()[0];
+            }
+            console.dir(layout);
+            return layout.getAreaEditions().forEach(function(areaEdition) {
+              if (areaEdition.isRequired() && !_this.hasData(areaEdition)) {
+                return completed = false;
+              }
+            });
+          };
+        })(this));
+        return completed;
+      };
+
       function UserPersonalization(themes) {
         this.personalizations_layout = {};
+        this.areaEditionData = {};
         this.themes = themes.map(function(theme) {
           return new Theme(theme);
         });
@@ -31,10 +54,10 @@ app.factory('UserPersonalization', [
       };
 
       UserPersonalization.prototype.hasInternalLayoutFor = function(personalization) {
-        return !!this.getSetedLayoutFor(personalization);
+        return !!this.getInternalLayout(personalization);
       };
 
-      UserPersonalization.prototype.getSetedLayoutFor = function(personalization) {
+      UserPersonalization.prototype.getInternalLayout = function(personalization) {
         return this.personalizations_layout[personalization.getId()];
       };
 
@@ -48,7 +71,7 @@ app.factory('UserPersonalization', [
         if (!this.hasInternalLayoutFor(this.personalization)) {
           return this.setLayout(this.personalization, this.personalization.getLayouts()[0]);
         } else {
-          return this.setLayout(this.personalization, this.getSetedLayoutFor(this.personalization));
+          return this.setLayout(this.personalization, this.getInternalLayout(this.personalization));
         }
       };
 
@@ -105,6 +128,22 @@ app.factory('UserPersonalization', [
         }).forEach(function(listener) {
           return listener.callback(object);
         });
+      };
+
+      UserPersonalization.prototype.setData = function(areaEdition, data) {
+        return this.areaEditionData[areaEdition.getId()] = data;
+      };
+
+      UserPersonalization.prototype.getData = function(areaEdition) {
+        return this.areaEditionData[areaEdition.getId()];
+      };
+
+      UserPersonalization.prototype.hasData = function(areaEdition) {
+        return !!this.getData(areaEdition);
+      };
+
+      UserPersonalization.prototype.removeData = function(areaEdition) {
+        return this.areaEditionData[areaEdition.getId()] = null;
       };
 
       return UserPersonalization;

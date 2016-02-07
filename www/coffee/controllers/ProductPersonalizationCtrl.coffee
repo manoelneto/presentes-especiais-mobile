@@ -41,18 +41,46 @@ app.controller 'ProductPersonalizationCtrl', [
     $scope.state = new PersonalizationState()
 
     $scope.chooseLayout = ->
-      $scope.state = $scope.state.clickLayoutButton()
+      if layoutChooseEnabled()
+        $scope.state = $scope.state.clickLayoutButton()
 
     $scope.chooseTheme = ->
-      $scope.state = $scope.state.clickThemeButton()
+      if themeChooseEnabled()
+        $scope.state = $scope.state.clickThemeButton()
+
+    layoutChooseEnabled = ->
+      if $scope.personalization
+        if $scope.personalization.getLayouts().length > 1
+          return true
+
+      return false
 
     $scope.layoutButtonClass = ->
+      toReturn = []
       if $scope.state.getSection() == 'layout'
-        return 'active'
+        toReturn.push 'active'
+
+      if not layoutChooseEnabled()
+        toReturn.push 'disabled'
+
+      toReturn.join(' ')
+
+    themeChooseEnabled = ->
+      if $scope.product
+        if $scope.product.getThemes().length > 1
+          return true
+
+      return false
 
     $scope.themeButtonClass = ->
+      toReturn = []
       if $scope.state.getSection() == 'theme'
-        return 'active'
+        toReturn.push 'active'
+
+      if not themeChooseEnabled()
+        toReturn.push 'disabled'
+
+      toReturn.join(' ')
 
     $scope.setTheme = (theme) ->
       $scope.state = new PersonalizationState()
@@ -161,7 +189,7 @@ app.controller 'ProductPersonalizationCtrl', [
 
     $scope.executeProperAction = (areaEdition) ->
       if areaEdition.isImage()
-        if areaEdition.hasData()
+        if $scope.userPersonalization.hasData areaEdition
           openChangeImageModal(areaEdition)
         else
           imagePicker(areaEdition)
@@ -177,7 +205,7 @@ app.controller 'ProductPersonalizationCtrl', [
     # executado quando clicar no botão remove no modal que for aberto
     $scope.modalRemove = ->
       areaEdition = $scope.modalItem
-      areaEdition.removeData()
+      $scope.userPersonalization.removeData areaEdition
       $scope.modal.remove()
 
     # remove o modal e fecha
@@ -195,7 +223,7 @@ app.controller 'ProductPersonalizationCtrl', [
     imagePicker = (areaEdition) ->
       # no desktop, carregue uma imagem qualquer
       if not window.imagePicker
-        areaEdition.setPicture 'https://placeholdit.imgix.net/~text?txtsize=23&bg=bada55&txt=500%C3%97500&w=500&h=500'
+        $scope.userPersonalization.setData areaEdition, 'https://placeholdit.imgix.net/~text?txtsize=23&bg=bada55&txt=500%C3%97500&w=500&h=500'
         return
 
       galleryStrategy = new GalleryImageStrategy()
@@ -211,7 +239,7 @@ app.controller 'ProductPersonalizationCtrl', [
             title: 'Corte sua imagem'
         }).then (canvas) ->
           $timeout ->
-            areaEdition.setPicture canvas.toDataURL()
+            $scope.userPersonalization.setData areaEdition, canvas.toDataURL()
         , () ->
           console.log 'some error'
           console.log arguments

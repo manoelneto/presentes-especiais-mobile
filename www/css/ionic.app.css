@@ -11457,6 +11457,10 @@ swiper-slider.no-slide-width .swiper-slide {
   text-align: center;
   font-size: 17px;
 }
+.personalization .footer a.disabled {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20);
+  opacity: 0.2;
+}
 .personalization .footer a i {
   display: block;
   margin: 0 auto;

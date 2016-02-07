@@ -78,24 +78,56 @@ ThemeState = (function(superClass) {
 
 app.controller('ProductPersonalizationCtrl', [
   '$scope', '$state', 'ProductService', 'UserPersonalization', 'GalleryImageStrategy', '$timeout', '$jrCrop', '$ionicModal', 'PersonalizationShare', function($scope, $state, ProductService, UserPersonalization, GalleryImageStrategy, $timeout, $jrCrop, $ionicModal, PersonalizationShare) {
-    var createUserPersonalization, id, imagePicker, openChangeImageModal, removeModal;
+    var createUserPersonalization, id, imagePicker, layoutChooseEnabled, openChangeImageModal, removeModal, themeChooseEnabled;
     id = $state.params.id;
     $scope.state = new PersonalizationState();
     $scope.chooseLayout = function() {
-      return $scope.state = $scope.state.clickLayoutButton();
+      if (layoutChooseEnabled()) {
+        return $scope.state = $scope.state.clickLayoutButton();
+      }
     };
     $scope.chooseTheme = function() {
-      return $scope.state = $scope.state.clickThemeButton();
+      if (themeChooseEnabled()) {
+        return $scope.state = $scope.state.clickThemeButton();
+      }
+    };
+    layoutChooseEnabled = function() {
+      if ($scope.personalization) {
+        if ($scope.personalization.getLayouts().length > 1) {
+          return true;
+        }
+      }
+      return false;
     };
     $scope.layoutButtonClass = function() {
+      var toReturn;
+      toReturn = [];
       if ($scope.state.getSection() === 'layout') {
-        return 'active';
+        toReturn.push('active');
       }
+      if (!layoutChooseEnabled()) {
+        toReturn.push('disabled');
+      }
+      return toReturn.join(' ');
+    };
+    themeChooseEnabled = function() {
+      if ($scope.product) {
+        if ($scope.product.getThemes().length > 1) {
+          return true;
+        }
+      }
+      return false;
     };
     $scope.themeButtonClass = function() {
+      var toReturn;
+      toReturn = [];
       if ($scope.state.getSection() === 'theme') {
-        return 'active';
+        toReturn.push('active');
       }
+      if (!themeChooseEnabled()) {
+        toReturn.push('disabled');
+      }
+      return toReturn.join(' ');
     };
     $scope.setTheme = function(theme) {
       $scope.state = new PersonalizationState();
@@ -160,7 +192,7 @@ app.controller('ProductPersonalizationCtrl', [
     };
     $scope.executeProperAction = function(areaEdition) {
       if (areaEdition.isImage()) {
-        if (areaEdition.hasData()) {
+        if ($scope.userPersonalization.hasData(areaEdition)) {
           return openChangeImageModal(areaEdition);
         } else {
           return imagePicker(areaEdition);
@@ -178,7 +210,7 @@ app.controller('ProductPersonalizationCtrl', [
     $scope.modalRemove = function() {
       var areaEdition;
       areaEdition = $scope.modalItem;
-      areaEdition.removeData();
+      $scope.userPersonalization.removeData(areaEdition);
       return $scope.modal.remove();
     };
     removeModal = function() {
@@ -191,7 +223,7 @@ app.controller('ProductPersonalizationCtrl', [
     return imagePicker = function(areaEdition) {
       var galleryStrategy;
       if (!window.imagePicker) {
-        areaEdition.setPicture('https://placeholdit.imgix.net/~text?txtsize=23&bg=bada55&txt=500%C3%97500&w=500&h=500');
+        $scope.userPersonalization.setData(areaEdition, 'https://placeholdit.imgix.net/~text?txtsize=23&bg=bada55&txt=500%C3%97500&w=500&h=500');
         return;
       }
       galleryStrategy = new GalleryImageStrategy();
@@ -206,7 +238,7 @@ app.controller('ProductPersonalizationCtrl', [
           title: 'Corte sua imagem'
         }).then(function(canvas) {
           return $timeout(function() {
-            return areaEdition.setPicture(canvas.toDataURL());
+            return $scope.userPersonalization.setData(areaEdition, canvas.toDataURL());
           });
         }, function() {
           console.log('some error');
