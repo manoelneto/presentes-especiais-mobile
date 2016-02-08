@@ -2,15 +2,49 @@ app.factory 'UserPersonalization', ['Utils', 'Theme', (Utils, Theme) ->
 
   class UserPersonalization
 
+    getCreateParams: ->
+      personalizationsParams = []
+
+      @theme.getPersonalizations().forEach (personalization) =>
+        layout = @getLayoutFor personalization
+
+        personalizationParam = {
+          personalization_id: personalization.getId()
+          layout_id: layout.getId()
+          area_edition_params: []
+        }
+
+        layout.getAreaEditions().forEach (areaEdition) =>
+          if @hasData areaEdition
+            areaParam = {}
+
+            if areaEdition.isImage()
+              angular.extend areaParam, image: @getData(areaEdition)
+
+            if areaEdition.isText()
+              angular.extend areaParam, text: @getData(areaEdition)
+
+            personalizationParam.area_edition_params.push areaParam
+
+        personalizationsParams.push personalizationParam
+
+      params = {
+        theme_id: @theme.getId()
+        personalization_params: personalizationsParams
+      }
+
+      console.dir params
+
+    getLayoutFor: (personalization) ->
+      if @hasInternalLayoutFor personalization
+        layout = @getInternalLayout personalization
+      else
+        layout = personalization.getLayouts()[0]
+
     hasCompleted: ->
       completed = true
       @theme.getPersonalizations().forEach (personalization) =>
-        if @hasInternalLayoutFor personalization
-          layout = @getInternalLayout personalization
-        else
-          layout = personalization.getLayouts()[0]
-
-        console.dir layout
+        layout = @getLayoutFor personalization
 
         layout.getAreaEditions().forEach (areaEdition) =>
           if areaEdition.isRequired() and not @hasData(areaEdition)

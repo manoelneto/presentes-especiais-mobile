@@ -22,10 +22,6 @@ app.factory("AreaEdition", [
         return css;
       };
 
-      AreaEdition.prototype.getId = function() {
-        return this.attributes.id;
-      };
-
       AreaEdition.prototype.getWidth = function() {
         return this.attributes.x2 - this.attributes.x1;
       };

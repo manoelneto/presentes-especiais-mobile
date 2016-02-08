@@ -156,6 +156,9 @@ app.controller('ProductPersonalizationCtrl', [
       });
       return $scope.userPersonalization.setDefault();
     };
+    $scope.completePersonalization = function() {
+      return $scope.userPersonalization.getCreateParams();
+    };
     openChangeImageModal = function(areaEdition) {
       $scope.modalItem = areaEdition;
       return $ionicModal.fromTemplateUrl('templates/modals/personalization-change-image.html', {
@@ -186,7 +189,7 @@ app.controller('ProductPersonalizationCtrl', [
     };
     $scope.showCompleteButton = function() {
       if ($scope.userPersonalization) {
-        return $scope.userPersonalization.isLastPersonalization($scope.personalization);
+        return $scope.userPersonalization.isLastPersonalization($scope.personalization) && $scope.userPersonalization.hasCompleted();
       }
       return false;
     };

@@ -2,18 +2,61 @@ app.factory('UserPersonalization', [
   'Utils', 'Theme', function(Utils, Theme) {
     var UserPersonalization;
     UserPersonalization = (function() {
+      UserPersonalization.prototype.getCreateParams = function() {
+        var params, personalizationsParams;
+        personalizationsParams = [];
+        this.theme.getPersonalizations().forEach((function(_this) {
+          return function(personalization) {
+            var layout, personalizationParam;
+            layout = _this.getLayoutFor(personalization);
+            personalizationParam = {
+              personalization_id: personalization.getId(),
+              layout_id: layout.getId(),
+              area_edition_params: []
+            };
+            layout.getAreaEditions().forEach(function(areaEdition) {
+              var areaParam;
+              if (_this.hasData(areaEdition)) {
+                areaParam = {};
+                if (areaEdition.isImage()) {
+                  angular.extend(areaParam, {
+                    image: _this.getData(areaEdition)
+                  });
+                }
+                if (areaEdition.isText()) {
+                  angular.extend(areaParam, {
+                    text: _this.getData(areaEdition)
+                  });
+                }
+                return personalizationParam.area_edition_params.push(areaParam);
+              }
+            });
+            return personalizationsParams.push(personalizationParam);
+          };
+        })(this));
+        params = {
+          theme_id: this.theme.getId(),
+          personalization_params: personalizationsParams
+        };
+        return console.dir(params);
+      };
+
+      UserPersonalization.prototype.getLayoutFor = function(personalization) {
+        var layout;
+        if (this.hasInternalLayoutFor(personalization)) {
+          return layout = this.getInternalLayout(personalization);
+        } else {
+          return layout = personalization.getLayouts()[0];
+        }
+      };
+
       UserPersonalization.prototype.hasCompleted = function() {
         var completed;
         completed = true;
         this.theme.getPersonalizations().forEach((function(_this) {
           return function(personalization) {
             var layout;
-            if (_this.hasInternalLayoutFor(personalization)) {
-              layout = _this.getInternalLayout(personalization);
-            } else {
-              layout = personalization.getLayouts()[0];
-            }
-            console.dir(layout);
+            layout = _this.getLayoutFor(personalization);
             return layout.getAreaEditions().forEach(function(areaEdition) {
               if (areaEdition.isRequired() && !_this.hasData(areaEdition)) {
                 return completed = false;

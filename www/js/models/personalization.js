@@ -22,10 +22,6 @@ app.factory("Personalization", [
         return API.base_image_url + this.attributes.picture_area_bg;
       };
 
-      Personalization.prototype.getId = function() {
-        return this.attributes.id;
-      };
-
       return Personalization;
 
     })(Model);

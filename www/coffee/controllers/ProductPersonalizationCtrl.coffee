@@ -154,6 +154,9 @@ app.controller 'ProductPersonalizationCtrl', [
 
       $scope.userPersonalization.setDefault()
 
+    $scope.completePersonalization = ->
+      $scope.userPersonalization.getCreateParams()
+
     # abre o modal pedindo qual ação o usuário vai executar
     openChangeImageModal = (areaEdition) ->
       $scope.modalItem = areaEdition
@@ -184,7 +187,7 @@ app.controller 'ProductPersonalizationCtrl', [
 
     $scope.showCompleteButton = ->
       if $scope.userPersonalization
-        return $scope.userPersonalization.isLastPersonalization($scope.personalization)
+        return $scope.userPersonalization.isLastPersonalization($scope.personalization) and $scope.userPersonalization.hasCompleted()
       return false
 
     $scope.executeProperAction = (areaEdition) ->

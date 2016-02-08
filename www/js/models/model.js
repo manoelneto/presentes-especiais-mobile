@@ -5,6 +5,10 @@ app.factory("Model", function() {
       this.attributes = attributes;
     }
 
+    Model.prototype.getId = function() {
+      return this.attributes.id;
+    };
+
     return Model;
 
   })();

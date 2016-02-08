@@ -14,9 +14,6 @@ app.factory "AreaEdition", [ 'Model', (Model) ->
       css = "#{css} height: #{(a.y2 - a.y1) / baseSizePercent}%;"
       css
 
-    getId: ->
-      @attributes.id
-
     getWidth: ->
       @attributes.x2 -  @attributes.x1
 

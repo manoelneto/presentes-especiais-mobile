@@ -14,8 +14,5 @@ app.factory "Personalization", [ 'Model', 'Layout', 'API', (Model, Layout, API) 
     getBackgroundUrl: ->
       API.base_image_url + @attributes.picture_area_bg
 
-    getId: ->
-      @attributes.id
-
   Personalization
 ]
