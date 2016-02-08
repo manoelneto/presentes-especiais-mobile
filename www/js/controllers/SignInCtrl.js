@@ -19,14 +19,13 @@ app.controller('SignInCtrl', [
       return loginPromise.then(function(accessToken) {
         FB.accessToken = accessToken;
         return User.loginWithFbToken(accessToken).then(function(response) {
-          User.current_user = response.data;
-          return alert("Login realizado com sucesso, token -> " + response.data.spree_api_key);
+          return User.current_user = response.data;
         })["catch"](function(response) {
           return FB.me().then(function(response) {
             User.fbResponse = response;
             return $state.go('registration_new');
-          });
-        });
+          })["catch"](function(response) {});
+        })["catch"](function(response) {});
       });
     };
   }

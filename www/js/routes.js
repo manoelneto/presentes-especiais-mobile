@@ -1,9 +1,4 @@
 app.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider.state('index', {
-    url: '',
-    templateUrl: 'templates/products/index.html',
-    controller: 'ProductIndexCtrl'
-  });
   $stateProvider.state('registration_new', {
     url: '/registration/new',
     templateUrl: 'templates/registration_new.html',
@@ -23,5 +18,35 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/products/index.html',
     controller: 'ProductIndexCtrl'
   });
-  return $urlRouterProvider.otherwise('/');
+  $stateProvider.state('product_personalization', {
+    url: '/produtos/:id/personalizar',
+    templateUrl: 'templates/products/personalization.html',
+    controller: 'ProductPersonalizationCtrl'
+  });
+  $stateProvider.state('products_show', {
+    url: '/produtos/:id',
+    templateUrl: 'templates/products/show.html',
+    controller: 'ProductShowCtrl'
+  });
+  $stateProvider.state('categories_show', {
+    url: '/categorias/:id',
+    templateUrl: 'templates/categories/show.html',
+    controller: 'CategoryShowCtrl'
+  });
+  $stateProvider.state('indication', {
+    url: '/indicacao',
+    templateUrl: 'templates/indication.html',
+    controller: 'IndicationCtrl'
+  });
+  $stateProvider.state('login', {
+    url: '/login',
+    templateUrl: 'templates/login.html',
+    controller: 'SignInCtrl'
+  });
+  $stateProvider.state('cart', {
+    url: '/carrinho',
+    templateUrl: 'templates/cart.html',
+    controller: 'CartCtrl'
+  });
+  return $urlRouterProvider.otherwise('/produtos');
 });

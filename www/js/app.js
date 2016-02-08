@@ -1,4 +1,4 @@
-window.app = angular.module('app', ['ionic', 'ui.router', 'ngOpenFB']);
+window.app = angular.module('app', ['ionic', 'ui.router', 'ngOpenFB', 'jrCrop']);
 
 app.run(function($ionicPlatform, $openFB) {
   $openFB.init({

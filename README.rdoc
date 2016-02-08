@@ -30,6 +30,10 @@ Install node dependences
 
   $ npm install
 
+Install ionic e gulp
+
+  $ sudo npm install -g ionic gulp
+
 === Runing
 
 Runing project

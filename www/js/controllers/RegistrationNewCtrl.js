@@ -27,7 +27,7 @@ app.controller('RegistrationNewCtrl', [
         User.current_user = response.data;
         return alert("Usuário cadastrado com sucesso");
       })["catch"](function(response) {
-        if (response.data.email) {
+        if (response && response.data && response.data.email) {
           return $scope.has_email = true;
         } else {
           return alert("Houve um erro ao conectar com o servidor");

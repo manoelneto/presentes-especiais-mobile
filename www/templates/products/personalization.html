@@ -1,0 +1,87 @@
+
+<ion-view view-title="Personalize" class="store personalization">
+  <ion-nav-buttons side="right">
+    <cart-button></cart-button>
+    <menu-toggle-right-button></menu-toggle-right-button>
+  </ion-nav-buttons>
+
+  <ion-content class="white-content has-header">
+    <div class="product-name">
+      {{ product.getName() }}
+    </div>
+
+    <div data-ng-if="state.getSection() == 'personalization'">
+      <div class="molde-wrapper">
+        <img data-ng-src="{{ personalization.getBackgroundUrl() }}" alt="" class="personalization-molde">
+
+        <div class="personalization-area {{ areaEdition.getType() }}" style="{{ areaEdition.getCss() }}" data-ng-repeat="areaEdition in layout.getAreaEditions()" data-ng-click="executeProperAction(areaEdition)" data-ng-if="!userPersonalization.hasData(areaEdition)">
+          <div class="gl-table-wrapper">
+            <div class="gl-table-cell-wrapper">
+              <img data-ng-src="{{ areaEdition.getPlaceholderIconUrl() }}" alt="" class="placeholder-icon">
+            </div>
+          </div>
+        </div>
+
+        <div class="personalization-area {{ areaEdition.getType() }}" style="{{ areaEdition.getCss() }}" data-ng-repeat="areaEdition in layout.getAreaEditions()" data-ng-click="executeProperAction(areaEdition)" data-ng-if="userPersonalization.hasData(areaEdition)">
+          <img data-ng-src="{{ userPersonalization.getData(areaEdition) }}" style="width: 100%; height: 100%" alt="" data-ng-if="areaEdition.isImage()">
+        </div>
+      </div>
+
+      <div class="row row-m-20">
+        <div class="col" data-ng-if="showPrevButton()" data-ng-click="prevPersonalization()">
+          <a href="#" class="personalization-strong-button">
+            Voltar
+          </a>
+        </div>
+        <div class="col" data-ng-if="showNextButton()" data-ng-click="nextPersonalization()">
+          <a href="#" class="personalization-strong-button">
+            Próximo
+          </a>
+        </div>
+        <div class="col" data-ng-if="showCompleteButton()" data-ng-click="completePersonalization()">
+          <a href="#" class="personalization-strong-button">
+            Finalizar
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div data-ng-if="state.getSection() == 'theme'">
+      <div data-ng-repeat="theme in userPersonalization.getThemes()">
+        <a href="javascript://" class="theme" data-ng-click="setTheme(theme)">
+          Choose theme: {{ theme.getName() }}
+        </a>
+      </div>
+    </div>
+
+    <div data-ng-if="state.getSection() == 'layout'">
+      <div data-ng-repeat="layout in personalization.getLayouts()">
+        <a href="javascript://" class="layout" data-ng-click="setLayout(layout)">
+          Choose layout: {{ layout.getName() }}
+        </a>
+      </div>
+    </div>
+
+
+    <div class="clearfix"></div>
+    <div class="footer-margin"></div>
+    <div class="clearfix"></div>
+  </ion-content>
+
+  <div class="footer">
+    <div class="row row-center main-footer-row">
+      <div class="col">
+        <a href="#" data-ng-class="layoutButtonClass()" data-ng-click="chooseLayout()">
+          <i class="icon-layout"></i>
+          Layout
+        </a>
+      </div>
+      <div class="col">
+        <a href="" data-ng-class="themeButtonClass()" data-ng-click="chooseTheme()">
+          <i class="icon-theme"></i>
+          Temas
+        </a>
+      </div>
+    </div>
+  </div>
+</ion-view>

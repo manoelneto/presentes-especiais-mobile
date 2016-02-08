@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'"> -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://jsonplaceholder.typicode.com http://localhost:3000 http://192.168.57.1:3000 http://192.168.0.152:3000 http://localhost:35729 ws://localhost:35729 http://peb-webfac.tk; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:35729; frame-src *; img-src 'self' data: http://localhost:3000 http://192.168.57.1:3000 http://192.168.0.152:3000 https://placeholdit.imgix.net http://peb-webfac.tk">
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
   <title></title>
 
   <link href="lib/Swiper/dist/css/swiper.css" rel="stylesheet">
+  <link href="lib/jr-crop/dist/jr-crop.css" rel="stylesheet">
   <link href="css/ionic.app.css" rel="stylesheet">
 
   <script src="lib/ionic/js/ionic.bundle.js"></script>
@@ -14,16 +17,44 @@
 
   <script src="lib/ngOpenFB/ngOpenFB.js"></script>
   <script src="lib/ngOpenFB/bin/ngCordova.js"></script>
+  <script src="lib/jr-crop/src/jr-crop.js"></script>
   <script src="js/app.js"></script>
   <script src="js/settings.js"></script>
 
+  <script src="js/utils.js"></script>
+
+  <script src="js/strategies/GalleryImageStrategy.js"></script>
+
+  <script src="js/models/Model.js"></script>
+  <script src="js/models/Product.js"></script>
+  <script src="js/models/Category.js"></script>
+  <script src="js/models/AreaEdition.js"></script>
+  <script src="js/models/Layout.js"></script>
+  <script src="js/models/Personalization.js"></script>
+  <script src="js/models/Theme.js"></script>
+
+  <script src="js/facades/SwiperFacade.js"></script>
+
+  <script src="js/personalizations/UserPersonalization.js"></script>
+  <script src="js/personalizations/PersonalizationShare.js"></script>
+
+  <script src="js/services/Service.js"></script>
+  <script src="js/services/CartService.js"></script>
+  <script src="js/services/ProductService.js"></script>
+  <script src="js/services/CategoryService.js"></script>
   <script src="js/services/User.js"></script>
   <script src="js/services/FB.js"></script>
+  <script src="js/services/IndicationService.js"></script>
 
+  <script src="js/controllers/CartCtrl.js"></script>
   <script src="js/controllers/SignInCtrl.js"></script>
   <script src="js/controllers/RegistrationNewCtrl.js"></script>
   <script src="js/controllers/ModulesListCtrl.js"></script>
   <script src="js/controllers/ProductIndexCtrl.js"></script>
+  <script src="js/controllers/ProductShowCtrl.js"></script>
+  <script src="js/controllers/ProductPersonalizationCtrl.js"></script>
+  <script src="js/controllers/CategoryShowCtrl.js"></script>
+  <script src="js/controllers/IndicationCtrl.js"></script>
 
   <script src="lib/Swiper/dist/js/swiper.js"></script>
 
@@ -48,10 +79,15 @@
       </ion-nav-title>
 
       <ion-nav-buttons side="right">
-        <menu-toggle-right-button></menu-toggle-right-button>
+        <!-- isso daqui ta dando pau -->
+        <!-- <menu-toggle-right-button></menu-toggle-right-button> -->
       </ion-nav-buttons>
+
     </ion-nav-bar>
 
-    <ion-nav-view></ion-nav-view>
+    <ion-nav-view>
+
+    </ion-nav-view>
+
 </body>
 </html>
