@@ -77,7 +77,7 @@ ThemeState = (function(superClass) {
 })(State);
 
 app.controller('ProductPersonalizationCtrl', [
-  '$scope', '$state', 'ProductService', 'UserPersonalization', 'GalleryImageStrategy', '$timeout', '$jrCrop', '$ionicModal', 'PersonalizationShare', function($scope, $state, ProductService, UserPersonalization, GalleryImageStrategy, $timeout, $jrCrop, $ionicModal, PersonalizationShare) {
+  '$scope', '$state', 'ProductService', 'UserPersonalization', 'GalleryImageStrategy', '$timeout', '$jrCrop', '$ionicModal', 'PersonalizationShare', 'UserPerService', function($scope, $state, ProductService, UserPersonalization, GalleryImageStrategy, $timeout, $jrCrop, $ionicModal, PersonalizationShare, UserPerService) {
     var createUserPersonalization, id, imagePicker, layoutChooseEnabled, openChangeImageModal, removeModal, themeChooseEnabled;
     id = $state.params.id;
     $scope.state = new PersonalizationState();
@@ -157,7 +157,12 @@ app.controller('ProductPersonalizationCtrl', [
       return $scope.userPersonalization.setDefault();
     };
     $scope.completePersonalization = function() {
-      return $scope.userPersonalization.getCreateParams();
+      console.log($scope.userPersonalization.getCreateParams());
+      return UserPerService.create({
+        user_per: $scope.userPersonalization.getCreateParams()
+      }).then(function() {
+        return console.dir(arguments);
+      });
     };
     openChangeImageModal = function(areaEdition) {
       $scope.modalItem = areaEdition;

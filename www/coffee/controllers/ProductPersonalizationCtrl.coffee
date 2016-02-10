@@ -34,8 +34,9 @@ class ThemeState extends State
     new PersonalizationState()
 
 app.controller 'ProductPersonalizationCtrl', [
-  '$scope', '$state', 'ProductService', 'UserPersonalization', 'GalleryImageStrategy', '$timeout', '$jrCrop', '$ionicModal', 'PersonalizationShare',
-  ($scope, $state, ProductService, UserPersonalization, GalleryImageStrategy, $timeout, $jrCrop, $ionicModal, PersonalizationShare) ->
+  '$scope', '$state', 'ProductService', 'UserPersonalization', 'GalleryImageStrategy', '$timeout',
+  '$jrCrop', '$ionicModal', 'PersonalizationShare', 'UserPerService',
+  ($scope, $state, ProductService, UserPersonalization, GalleryImageStrategy, $timeout, $jrCrop, $ionicModal, PersonalizationShare, UserPerService) ->
     id = $state.params.id
 
     $scope.state = new PersonalizationState()
@@ -155,7 +156,10 @@ app.controller 'ProductPersonalizationCtrl', [
       $scope.userPersonalization.setDefault()
 
     $scope.completePersonalization = ->
-      $scope.userPersonalization.getCreateParams()
+      console.log $scope.userPersonalization.getCreateParams()
+      UserPerService.create user_per: $scope.userPersonalization.getCreateParams()
+        .then ->
+          console.dir arguments
 
     # abre o modal pedindo qual ação o usuário vai executar
     openChangeImageModal = (areaEdition) ->

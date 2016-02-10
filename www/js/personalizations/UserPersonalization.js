@@ -12,12 +12,18 @@ app.factory('UserPersonalization', [
             personalizationParam = {
               personalization_id: personalization.getId(),
               layout_id: layout.getId(),
-              area_edition_params: []
+              user_area_pers_attributes: []
             };
             layout.getAreaEditions().forEach(function(areaEdition) {
               var areaParam;
               if (_this.hasData(areaEdition)) {
-                areaParam = {};
+                areaParam = {
+                  x1: areaEdition.getX1(),
+                  x2: areaEdition.getX2(),
+                  y1: areaEdition.getY1(),
+                  y2: areaEdition.getY2(),
+                  area_type: areaEdition.getType()
+                };
                 if (areaEdition.isImage()) {
                   angular.extend(areaParam, {
                     image: _this.getData(areaEdition)
@@ -28,7 +34,7 @@ app.factory('UserPersonalization', [
                     text: _this.getData(areaEdition)
                   });
                 }
-                return personalizationParam.area_edition_params.push(areaParam);
+                return personalizationParam.user_area_pers_attributes.push(areaParam);
               }
             });
             return personalizationsParams.push(personalizationParam);
@@ -36,9 +42,9 @@ app.factory('UserPersonalization', [
         })(this));
         params = {
           theme_id: this.theme.getId(),
-          personalization_params: personalizationsParams
+          user_per_pers_attributes: personalizationsParams
         };
-        return console.dir(params);
+        return params;
       };
 
       UserPersonalization.prototype.getLayoutFor = function(personalization) {

@@ -74,6 +74,22 @@ app.factory("AreaEdition", [
         return this.attributes.required;
       };
 
+      AreaEdition.prototype.getX1 = function() {
+        return this.attributes.x1;
+      };
+
+      AreaEdition.prototype.getX2 = function() {
+        return this.attributes.x2;
+      };
+
+      AreaEdition.prototype.getY1 = function() {
+        return this.attributes.y1;
+      };
+
+      AreaEdition.prototype.getY2 = function() {
+        return this.attributes.y2;
+      };
+
       return AreaEdition;
 
     })(Model);
