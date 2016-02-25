@@ -59,7 +59,6 @@ app.factory "Service", [ '$http', '$q', 'User', ($http, $q, User) ->
           method: 'post'
           data: params
         }
-        console.dir options
 
         $http options
           .then (response) =>
@@ -70,6 +69,23 @@ app.factory "Service", [ '$http', '$q', 'User', ($http, $q, User) ->
 
           .catch ->
             console.log JSON.stringify arguments
+            reject(arguments...)
+
+    # responsable to destroy object in system
+    @delete = (id) ->
+      console.log "deleting"
+      $q (resolve, reject) =>
+        options = angular.extend {}, @getHeaders(), {
+          url: "#{@baseUrl}/#{id}.json"
+          method: 'delete'
+        }
+        $http options
+          .then (response) =>
+            console.log "deleted"
+            resolve()
+
+          .catch ->
+            console.log "deleting error"
             reject()
 
     # get itens from response

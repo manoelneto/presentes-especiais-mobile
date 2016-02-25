@@ -47,12 +47,15 @@
         </div>
 
 
-        <div data-ng-if="UserService.current_user"></div>
-        <div>
-          <p>
-            <a href="#/modules_list">Ir para módulos</a>
-            <a href="#/produtos">Produtos</a>
-          </p>
+        <div data-ng-if="UserService.current_user">
+          <div>
+            Usuário autenticado
+          </div>
+          <div>
+            <p>
+              <a href="#/produtos">Ir para Produtos</a>
+            </p>
+          </div>
         </div>
 
         <p>

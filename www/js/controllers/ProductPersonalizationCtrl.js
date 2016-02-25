@@ -77,10 +77,11 @@ ThemeState = (function(superClass) {
 })(State);
 
 app.controller('ProductPersonalizationCtrl', [
-  '$scope', '$state', 'ProductService', 'UserPersonalization', 'GalleryImageStrategy', '$timeout', '$jrCrop', '$ionicModal', 'PersonalizationShare', 'UserPerService', function($scope, $state, ProductService, UserPersonalization, GalleryImageStrategy, $timeout, $jrCrop, $ionicModal, PersonalizationShare, UserPerService) {
+  '$scope', '$state', 'ProductService', 'UserPersonalization', 'GalleryImageStrategy', '$timeout', '$jrCrop', '$ionicModal', 'PersonalizationShare', 'UserPerService', 'CartFacade', '$location', function($scope, $state, ProductService, UserPersonalization, GalleryImageStrategy, $timeout, $jrCrop, $ionicModal, PersonalizationShare, UserPerService, CartFacade, $location) {
     var createUserPersonalization, id, imagePicker, layoutChooseEnabled, openChangeImageModal, removeModal, themeChooseEnabled;
     id = $state.params.id;
     $scope.state = new PersonalizationState();
+    $scope.loading = true;
     $scope.chooseLayout = function() {
       if (layoutChooseEnabled()) {
         return $scope.state = $scope.state.clickLayoutButton();
@@ -139,7 +140,8 @@ app.controller('ProductPersonalizationCtrl', [
     };
     ProductService.find(id).then(function(product) {
       $scope.product = product;
-      return createUserPersonalization();
+      createUserPersonalization();
+      return $scope.loading = false;
     });
     createUserPersonalization = function() {
       var pThemes;
@@ -157,11 +159,23 @@ app.controller('ProductPersonalizationCtrl', [
       return $scope.userPersonalization.setDefault();
     };
     $scope.completePersonalization = function() {
-      console.log($scope.userPersonalization.getCreateParams());
+      $scope.loading = true;
       return UserPerService.create({
         user_per: $scope.userPersonalization.getCreateParams()
-      }).then(function() {
-        return console.dir(arguments);
+      }).then(function(userPer) {
+        return CartFacade.addItemToCart($scope.product, userPer, 1, $scope.product.getPriceInCents()).then(function(cartItem) {
+          $scope.loading = false;
+          console.log(cartItem);
+          return CartFacade.goToCart();
+        })["catch"](function() {
+          console.log(arguments);
+          return alert("Houve um erro ao adicionar o item no carrinho");
+        })["finally"](function() {
+          return $scope.loading = false;
+        });
+      })["catch"](function() {
+        alert("Houve um erro ao salvar personaliação");
+        return $scope.loading = false;
       });
     };
     openChangeImageModal = function(areaEdition) {
@@ -219,10 +233,12 @@ app.controller('ProductPersonalizationCtrl', [
       var areaEdition;
       areaEdition = $scope.modalItem;
       $scope.userPersonalization.removeData(areaEdition);
-      return $scope.modal.remove();
+      return removeModal();
     };
     removeModal = function() {
-      return $scope.modal.remove();
+      if ($scope.modal) {
+        return $scope.modal.remove();
+      }
     };
     $scope.modalCancel = removeModal;
     $scope.$on('$destroy', function() {

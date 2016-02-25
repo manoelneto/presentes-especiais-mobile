@@ -2,8 +2,23 @@ var extend = function(child, parent) { for (var key in parent) { if (hasProp.cal
   hasProp = {}.hasOwnProperty;
 
 app.service('CartService', [
-  'Service', 'API', '$http', '$q', '$timeout', function(Service, API, $http, $q, $timeout) {
-    var CartService;
+  'Service', 'API', '$http', '$q', 'Cart', function(Service, API, $http, $q, Cart) {
+    var CartService, cartResponse;
+    cartResponse = {
+      cart_items: [
+        {
+          name: "Bolsa item x",
+          quantity: 1,
+          price: 10000,
+          image: "http://localhost:3000/spree/products/23/small/ror_bag.jpeg?1449019362"
+        }, {
+          name: "outra bolsa",
+          quantity: 1,
+          price: 10000,
+          image: "http://localhost:3000/spree/products/23/small/ror_bag.jpeg?1449019362"
+        }
+      ]
+    };
     CartService = (function(superClass) {
       extend(CartService, superClass);
 
@@ -15,6 +30,27 @@ app.service('CartService', [
 
       CartService.plural_resource_name = function() {
         return 'carts';
+      };
+
+      CartService.getUserCart = function() {
+        return $q((function(_this) {
+          return function(resolve, reject) {
+            var options;
+            options = angular.extend({}, _this.getHeaders(), {
+              url: _this.baseUrl + "/user_cart.json",
+              method: 'get'
+            });
+            return $http(options).then(function(response) {
+              var item;
+              item = _this.getItenFromResponse(response);
+              item = new Cart(item);
+              console.log(item);
+              return resolve(item);
+            })["catch"](function() {
+              return reject();
+            });
+          };
+        })(this));
       };
 
       return CartService;

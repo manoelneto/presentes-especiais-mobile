@@ -60,7 +60,6 @@ app.factory("Service", [
               method: 'post',
               data: params
             });
-            console.dir(options);
             return $http(options).then(function(response) {
               var item;
               item = _this.getItenFromResponse(response);
@@ -68,6 +67,26 @@ app.factory("Service", [
               return resolve(item);
             })["catch"](function() {
               console.log(JSON.stringify(arguments));
+              return reject.apply(null, arguments);
+            });
+          };
+        })(this));
+      };
+
+      Service["delete"] = function(id) {
+        console.log("deleting");
+        return $q((function(_this) {
+          return function(resolve, reject) {
+            var options;
+            options = angular.extend({}, _this.getHeaders(), {
+              url: _this.baseUrl + "/" + id + ".json",
+              method: 'delete'
+            });
+            return $http(options).then(function(response) {
+              console.log("deleted");
+              return resolve();
+            })["catch"](function() {
+              console.log("deleting error");
               return reject();
             });
           };

@@ -53,6 +53,9 @@ app.factory 'UserPersonalization', ['Utils', 'Theme', (Utils, Theme) ->
       @theme.getPersonalizations().forEach (personalization) =>
         layout = @getLayoutFor personalization
 
+        if layout == undefined
+          return
+
         layout.getAreaEditions().forEach (areaEdition) =>
           if areaEdition.isRequired() and not @hasData(areaEdition)
             completed = false

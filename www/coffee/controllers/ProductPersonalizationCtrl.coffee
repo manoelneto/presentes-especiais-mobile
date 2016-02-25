@@ -35,11 +35,13 @@ class ThemeState extends State
 
 app.controller 'ProductPersonalizationCtrl', [
   '$scope', '$state', 'ProductService', 'UserPersonalization', 'GalleryImageStrategy', '$timeout',
-  '$jrCrop', '$ionicModal', 'PersonalizationShare', 'UserPerService',
-  ($scope, $state, ProductService, UserPersonalization, GalleryImageStrategy, $timeout, $jrCrop, $ionicModal, PersonalizationShare, UserPerService) ->
+  '$jrCrop', '$ionicModal', 'PersonalizationShare', 'UserPerService', 'CartFacade', '$location',
+  ($scope, $state, ProductService, UserPersonalization, GalleryImageStrategy, $timeout, $jrCrop, $ionicModal, PersonalizationShare, UserPerService, CartFacade, $location) ->
     id = $state.params.id
 
     $scope.state = new PersonalizationState()
+
+    $scope.loading = true
 
     $scope.chooseLayout = ->
       if layoutChooseEnabled()
@@ -94,6 +96,7 @@ app.controller 'ProductPersonalizationCtrl', [
     ProductService.find(id).then (product) ->
       $scope.product = product
       createUserPersonalization()
+      $scope.loading = false
 
     createUserPersonalization = ->
       pThemes = $scope.product.getThemes()
@@ -156,10 +159,29 @@ app.controller 'ProductPersonalizationCtrl', [
       $scope.userPersonalization.setDefault()
 
     $scope.completePersonalization = ->
-      console.log $scope.userPersonalization.getCreateParams()
+      $scope.loading = true
+      # salva a personalização no backend
       UserPerService.create user_per: $scope.userPersonalization.getCreateParams()
-        .then ->
-          console.dir arguments
+        .then (userPer) ->
+          # adiciona item ao carrinho.
+          CartFacade.addItemToCart(
+            $scope.product,
+            userPer,
+            1,
+            $scope.product.getPriceInCents()
+          ).then (cartItem) ->
+            $scope.loading = false
+            console.log cartItem
+            # alert "Item adicionado ao carrinho com sucesso"
+            CartFacade.goToCart()
+          .catch ->
+            console.log arguments
+            alert "Houve um erro ao adicionar o item no carrinho"
+          .finally ->
+            $scope.loading = false
+        .catch ->
+          alert "Houve um erro ao salvar personaliação"
+          $scope.loading = false
 
     # abre o modal pedindo qual ação o usuário vai executar
     openChangeImageModal = (areaEdition) ->
@@ -213,11 +235,12 @@ app.controller 'ProductPersonalizationCtrl', [
     $scope.modalRemove = ->
       areaEdition = $scope.modalItem
       $scope.userPersonalization.removeData areaEdition
-      $scope.modal.remove()
+      removeModal()
 
     # remove o modal e fecha
     removeModal = ->
-      $scope.modal.remove()
+      if $scope.modal
+        $scope.modal.remove()
 
     # executado quando clicar em cancelar no modal, o remove
     $scope.modalCancel = removeModal

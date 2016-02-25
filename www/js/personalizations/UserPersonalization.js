@@ -63,6 +63,9 @@ app.factory('UserPersonalization', [
           return function(personalization) {
             var layout;
             layout = _this.getLayoutFor(personalization);
+            if (layout === void 0) {
+              return;
+            }
             return layout.getAreaEditions().forEach(function(areaEdition) {
               if (areaEdition.isRequired() && !_this.hasData(areaEdition)) {
                 return completed = false;
