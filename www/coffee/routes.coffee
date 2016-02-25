@@ -64,5 +64,5 @@ app.config ($stateProvider, $urlRouterProvider) ->
     templateUrl: 'templates/cart.html'
     controller: 'CartCtrl'
 
-  # $urlRouterProvider.otherwise '/login'
-  $urlRouterProvider.otherwise '/produtos/17/personalizar'
+  $urlRouterProvider.otherwise '/login'
+  # $urlRouterProvider.otherwise '/produtos/17/personalizar'

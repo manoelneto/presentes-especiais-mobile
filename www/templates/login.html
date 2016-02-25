@@ -1,4 +1,6 @@
 <ion-view view-title="Login" hide-nav-bar="true">
+  <app-loader data-model="loading"></app-loader>
+
   <ion-content class="text-center login" >
     <div class="app-padding">
       <img src="img/home-logo@2x.png" class="img-home-logo">
@@ -31,7 +33,7 @@
           </div>
         </div>
 
-        <div data-ng-if="!UserService.current_user">
+        <div>
           <a href="javascript://" class="facebook-login" data-ng-click="facebookLogin()">
             <span class="facebook-icon"></span>
             Entrar com Facebook
@@ -45,24 +47,6 @@
             <a href="#/registration/new"> Cadastre-se</a>
           </p>
         </div>
-
-
-        <div data-ng-if="UserService.current_user">
-          <div>
-            Usuário autenticado
-          </div>
-          <div>
-            <p>
-              <a href="#/produtos">Ir para Produtos</a>
-            </p>
-          </div>
-        </div>
-
-        <p>
-          <a href="#/indicacao">
-            Modulo de indicações
-          </a>
-        </p>
 
       </div>
     </div>

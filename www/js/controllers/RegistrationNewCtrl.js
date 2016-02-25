@@ -1,5 +1,6 @@
 app.controller('RegistrationNewCtrl', [
   '$scope', '$state', 'User', function($scope, $state, User) {
+    $scope.loading = false;
     if (User.fbResponse) {
       $scope.user = {
         first_name: User.fbResponse.first_name,
@@ -23,15 +24,18 @@ app.controller('RegistrationNewCtrl', [
     };
     return $scope.signUp = function() {
       $scope.has_email = false;
+      $scope.loading = true;
       return User.create($scope.user).then(function(response) {
         User.current_user = response.data;
-        return alert("Usuário cadastrado com sucesso");
+        return $state.go("products_index");
       })["catch"](function(response) {
         if (response && response.data && response.data.email) {
           return $scope.has_email = true;
         } else {
           return alert("Houve um erro ao conectar com o servidor");
         }
+      })["finally"](function() {
+        return $scope.loading = false;
       });
     };
   }
