@@ -43,7 +43,7 @@ app.controller 'SignInCtrl', [ '$scope', '$state', 'User', 'FB', '$openFB', ($sc
           .finally ->
             $scope.loading = false
 
-        .catch (response) ->
-          $scope.loading = false
+      .catch (response) ->
+        $scope.loading = false
 
 ]

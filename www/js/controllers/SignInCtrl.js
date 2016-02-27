@@ -37,9 +37,9 @@ app.controller('SignInCtrl', [
           });
         })["finally"](function() {
           return $scope.loading = false;
-        })["catch"](function(response) {
-          return $scope.loading = false;
         });
+      })["catch"](function(response) {
+        return $scope.loading = false;
       });
     };
   }
