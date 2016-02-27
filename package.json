@@ -38,7 +38,8 @@
     {
       "locator": "https://github.com/hazemhagrass/phonegap-base64",
       "id": "com-badrit-base64"
-    }
+    },
+    "cordova-plugin-inappbrowser"
   ],
   "cordovaPlatforms": [
     "android",
