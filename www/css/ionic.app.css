@@ -10835,6 +10835,14 @@ a {
   text-decoration: none;
 }
 
+.menu-button {
+  color: white;
+  margin-top: 8px;
+  display: inline-block;
+  font-weight: bold;
+  margin-right: 7px;
+}
+
 ion-view {
   background: url('../img/bg.png?1451421482') no-repeat center center fixed !important;
   background-size: 100% 100% !important;
