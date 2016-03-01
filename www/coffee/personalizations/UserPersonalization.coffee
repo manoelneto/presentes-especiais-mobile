@@ -10,13 +10,20 @@ app.factory 'UserPersonalization', ['Utils', 'Theme', (Utils, Theme) ->
 
         personalizationParam = {
           personalization_id: personalization.getId()
+          # preciso do personalization picture
           layout_id: layout.getId()
-          area_edition_params: []
+          user_area_pers_attributes: []
         }
 
         layout.getAreaEditions().forEach (areaEdition) =>
           if @hasData areaEdition
-            areaParam = {}
+            areaParam = {
+              x1: areaEdition.getX1()
+              x2: areaEdition.getX2()
+              y1: areaEdition.getY1()
+              y2: areaEdition.getY2()
+              area_type: areaEdition.getType()
+            }
 
             if areaEdition.isImage()
               angular.extend areaParam, image: @getData(areaEdition)
@@ -24,16 +31,16 @@ app.factory 'UserPersonalization', ['Utils', 'Theme', (Utils, Theme) ->
             if areaEdition.isText()
               angular.extend areaParam, text: @getData(areaEdition)
 
-            personalizationParam.area_edition_params.push areaParam
+            personalizationParam.user_area_pers_attributes.push areaParam
 
         personalizationsParams.push personalizationParam
 
       params = {
         theme_id: @theme.getId()
-        personalization_params: personalizationsParams
+        user_per_pers_attributes: personalizationsParams
       }
 
-      console.dir params
+      params
 
     getLayoutFor: (personalization) ->
       if @hasInternalLayoutFor personalization
@@ -45,6 +52,9 @@ app.factory 'UserPersonalization', ['Utils', 'Theme', (Utils, Theme) ->
       completed = true
       @theme.getPersonalizations().forEach (personalization) =>
         layout = @getLayoutFor personalization
+
+        if layout == undefined
+          return
 
         layout.getAreaEditions().forEach (areaEdition) =>
           if areaEdition.isRequired() and not @hasData(areaEdition)

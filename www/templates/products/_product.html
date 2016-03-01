@@ -8,7 +8,11 @@
     {{ product.getName() }}
   </h2>
 
-  <a href="{{ product.getPersonalizationUrl() }}" class="personalize">
+  <a href="{{ product.getPersonalizationUrl() }}" class="personalize" data-ng-if="product.canPersonalizate()">
     Personalizar
+  </a>
+
+  <a href="javascript://" class="personalize" data-ng-if="!product.canPersonalizate()" data-ng-click="addToCart(product)">
+    Adicionar ao <img src="img/shopping-cart.svg" alt="" />
   </a>
 </div>

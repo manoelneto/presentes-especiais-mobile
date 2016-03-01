@@ -3,10 +3,19 @@ app.factory "Product", [ 'Model', 'API', (Model, API) ->
   class Product extends Model
 
     getName: ->
-      @attributes.name
+      @get 'name'
 
     getThemes: ->
-      @attributes.themes
+      @get 'themes'
+
+    getPrice: ->
+      @get 'price'
+
+    getPriceInCents: ->
+      parseInt(@get('price').replace('.', ''))
+
+    canPersonalizate: ->
+      @get 'has_personalization'
 
     getSmallImage: ->
       images = @attributes.master.images.map (image) ->

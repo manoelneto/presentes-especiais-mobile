@@ -5,8 +5,16 @@ app.factory("Model", function() {
       this.attributes = attributes;
     }
 
+    Model.prototype.get = function(attribute) {
+      return this.attributes[attribute];
+    };
+
     Model.prototype.getId = function() {
-      return this.attributes.id;
+      return this.get('id');
+    };
+
+    Model.prototype.isNew = function() {
+      return !this.getId();
     };
 
     return Model;

@@ -1,6 +1,6 @@
 # Todos os services devem estender dessa classe
 
-app.factory "Service", [ '$http', '$q', ($http, $q) ->
+app.factory "Service", [ '$http', '$q', 'User', ($http, $q, User) ->
 
   class Service
     # implements this
@@ -16,7 +16,11 @@ app.factory "Service", [ '$http', '$q', ($http, $q) ->
     @index = ->
       $q (resolve, reject) =>
 
-        $http.get "#{@baseUrl}.json"
+        options = angular.extend {}, @getHeaders(), {
+          url: "#{@baseUrl}.json"
+          method: 'get'
+        }
+        $http options
           .then (response) =>
             itens = @getItensFromResponse response
             itens = itens.map (item) =>
@@ -32,7 +36,11 @@ app.factory "Service", [ '$http', '$q', ($http, $q) ->
     @find = (id) ->
       $q (resolve, reject) =>
 
-        $http.get "#{@baseUrl}/#{id}.json"
+        options = angular.extend {}, @getHeaders(), {
+          url: "#{@baseUrl}/#{id}.json"
+          method: 'get'
+        }
+        $http options
           .then (response) =>
             item = @getItenFromResponse response
             item = new @modelClass(item)
@@ -40,6 +48,44 @@ app.factory "Service", [ '$http', '$q', ($http, $q) ->
             resolve(item)
 
           .catch ->
+            reject()
+
+    # responsable to create object in system
+    @create = (params) ->
+      $q (resolve, reject) =>
+
+        options = angular.extend {}, @getHeaders(), {
+          url: "#{@baseUrl}.json"
+          method: 'post'
+          data: params
+        }
+
+        $http options
+          .then (response) =>
+            item = @getItenFromResponse response
+            item = new @modelClass(item)
+
+            resolve(item)
+
+          .catch ->
+            console.log JSON.stringify arguments
+            reject(arguments...)
+
+    # responsable to destroy object in system
+    @delete = (id) ->
+      console.log "deleting"
+      $q (resolve, reject) =>
+        options = angular.extend {}, @getHeaders(), {
+          url: "#{@baseUrl}/#{id}.json"
+          method: 'delete'
+        }
+        $http options
+          .then (response) =>
+            console.log "deleted"
+            resolve()
+
+          .catch ->
+            console.log "deleting error"
             reject()
 
     # get itens from response
@@ -57,6 +103,14 @@ app.factory "Service", [ '$http', '$q', ($http, $q) ->
     # define plural resource
     @plural_resource_name = ->
       throw "Please implement getItensFromResponse"
+
+    # get connection headers
+    @getHeaders = ->
+      headers = {}
+      if User.current_user and User.current_user.spree_api_key
+        angular.extend headers, {'X-Spree-Token': User.current_user.spree_api_key}
+      headers: headers
+
 
   Service
 ]

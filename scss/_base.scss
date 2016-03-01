@@ -7,6 +7,14 @@ a {
     text-decoration: none;
 }
 
+.menu-button {
+  color: white;
+  margin-top: 8px;
+  display: inline-block;
+  font-weight: bold;
+  margin-right: 7px;
+}
+
 ion-view {
     background: image-url("bg.png") no-repeat center center fixed !important;
     background-size: 100% 100% !important;

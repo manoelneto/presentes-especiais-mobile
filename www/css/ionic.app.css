@@ -10835,6 +10835,14 @@ a {
   text-decoration: none;
 }
 
+.menu-button {
+  color: white;
+  margin-top: 8px;
+  display: inline-block;
+  font-weight: bold;
+  margin-right: 7px;
+}
+
 ion-view {
   background: url('../img/bg.png?1451421482') no-repeat center center fixed !important;
   background-size: 100% 100% !important;
@@ -11083,7 +11091,7 @@ ion-header-bar .title {
 
 .icon-layout {
   display: block;
-  background: url('../img/icon-layout@2x.png?1454429244');
+  background: url('../img/icon-layout@2x.png?1454961699');
   width: 29.5px;
   height: 29.5px;
   min-width: 29.5px;
@@ -11093,7 +11101,7 @@ ion-header-bar .title {
 
 .icon-theme {
   display: block;
-  background: url('../img/icon-theme@2x.png?1454429266');
+  background: url('../img/icon-theme@2x.png?1454961699');
   width: 29px;
   height: 27.5px;
   min-width: 29px;
@@ -11103,7 +11111,7 @@ ion-header-bar .title {
 
 .cart-exclude-item {
   display: block;
-  background: url('../img/cart-exclude-item@2x.png?1454202421');
+  background: url('../img/cart-exclude-item@2x.png?1454961699');
   width: 18.5px;
   height: 18.5px;
   min-width: 18.5px;
@@ -11113,7 +11121,7 @@ ion-header-bar .title {
 
 .cart-personalization-car {
   display: block;
-  background: url('../img/cart-personalization-car@2x.png?1454202466');
+  background: url('../img/cart-personalization-car@2x.png?1454961699');
   width: 27.5px;
   height: 24.5px;
   min-width: 27.5px;
@@ -11123,7 +11131,7 @@ ion-header-bar .title {
 
 .cart-personalization-edit {
   display: block;
-  background: url('../img/cart-personalization-edit@2x.png?1454202440');
+  background: url('../img/cart-personalization-edit@2x.png?1454961699');
   width: 22px;
   height: 22px;
   min-width: 22px;
@@ -11164,6 +11172,9 @@ ion-header-bar .title {
 .img-home-logo {
   margin-top: 30px;
   margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 .item-input.white-opacity-3 {
@@ -11212,7 +11223,7 @@ ion-header-bar .title {
   vertical-align: middle;
 }
 
-.registration_new .little-avatar {
+.little-avatar {
   margin-left: 3px;
   margin-right: 12px;
 }
@@ -11221,7 +11232,9 @@ ion-header-bar .title {
   border-radius: 50%;
   width: 80px;
   height: 80px;
-  margin-bottom: 10px;
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 20px;
 }
 
 swiper-slider {
@@ -11269,16 +11282,37 @@ swiper-slider.no-slide-width .swiper-slide {
 .cart-button .counter {
   position: absolute;
   z-index: 1;
-  left: 14px;
+  left: 12px;
   margin: 0 !important;
   text-align: center;
-  width: 17px;
+  width: 20px;
   top: -6px;
   font-weight: bold;
 }
 .cart-button i {
   position: relative;
   z-index: 0;
+}
+
+.app-loader {
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+.app-loader .loader-wrapper {
+  display: block;
+  margin: 0 auto;
+  width: 120px;
+  text-align: center;
+  background: black;
+  color: white;
+  border-radius: 14px;
+  padding: 10px 0;
 }
 
 .modules_list .module {

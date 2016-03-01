@@ -48,5 +48,5 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/cart.html',
     controller: 'CartCtrl'
   });
-  return $urlRouterProvider.otherwise('/produtos');
+  return $urlRouterProvider.otherwise('/login');
 });

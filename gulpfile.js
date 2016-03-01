@@ -8,6 +8,7 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var preprocess = require('gulp-preprocess');
 var sh = require('shelljs');
+var karma = require('karma').server;
 
 var paths = {
   compass: ['./scss/**/*.scss'],
@@ -15,6 +16,15 @@ var paths = {
 };
 
 gulp.task('default', ['compass']);
+
+gulp.task('test', function(done){
+  karma.start({
+    configFile: __dirname + '/tests/config.js',
+    singleRun: true
+  }, function(){
+    done();
+  });
+});
 
 gulp.task('compass', function(done) {
   gulp.src('asdf')

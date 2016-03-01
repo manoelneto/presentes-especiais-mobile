@@ -53,6 +53,18 @@ app.factory "AreaEdition", [ 'Model', (Model) ->
     isRequired: ->
       @attributes.required
 
+    getX1: ->
+      @attributes.x1
+
+    getX2: ->
+      @attributes.x2
+
+    getY1: ->
+      @attributes.y1
+
+    getY2: ->
+      @attributes.y2
+
   AreaEdition
 
 ]

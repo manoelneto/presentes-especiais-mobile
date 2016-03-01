@@ -5,9 +5,9 @@ window.app = angular.module('app', [
   'jrCrop'
 ])
 
-app.run(($ionicPlatform, $openFB) ->
+app.run(($ionicPlatform, $openFB, API) ->
     $openFB.init
-        appId: '1020478604640927'
+        appId: API.FB_ID
 
     $ionicPlatform.ready ->
         if window.cordova and window.cordova.plugins and window.cordova.plugins.Keyboard

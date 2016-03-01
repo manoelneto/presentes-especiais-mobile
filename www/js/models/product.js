@@ -12,11 +12,23 @@ app.factory("Product", [
       }
 
       Product.prototype.getName = function() {
-        return this.attributes.name;
+        return this.get('name');
       };
 
       Product.prototype.getThemes = function() {
-        return this.attributes.themes;
+        return this.get('themes');
+      };
+
+      Product.prototype.getPrice = function() {
+        return this.get('price');
+      };
+
+      Product.prototype.getPriceInCents = function() {
+        return parseInt(this.get('price').replace('.', ''));
+      };
+
+      Product.prototype.canPersonalizate = function() {
+        return this.get('has_personalization');
       };
 
       Product.prototype.getSmallImage = function() {

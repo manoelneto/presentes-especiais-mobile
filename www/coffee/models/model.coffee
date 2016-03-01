@@ -8,7 +8,13 @@ app.factory "Model", ->
     constructor: (attributes) ->
       @attributes = attributes
 
+    get: (attribute) ->
+      @attributes[attribute]
+
     getId: ->
-      @attributes.id
+      @get 'id'
+
+    isNew: ->
+      !@getId()
 
   Model

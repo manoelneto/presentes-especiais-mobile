@@ -1,6 +1,17 @@
-app.controller 'CartCtrl', ['$scope', '$state', 'Utils', 'CartService', ($scope, $state, Utils, CartService) ->
+app.controller 'CartCtrl', ['$scope', '$state', 'Utils', 'CartFacade', 'Cart',
+  ($scope, $state, Utils, CartFacade, Cart) ->
 
-  # CartService.index().then (carts) ->
-  #   $scope.cartsChuncks = Utils.chunckByTwo(carts)
+    $scope.loading = true
+
+    # criamos um cart sem nada inicialmente
+    $scope.cart = new Cart({})
+
+    CartFacade.getUserCart().then (cart) ->
+      $scope.cart = cart
+      $scope.loading = false
+
+    $scope.delete = (cartItem) ->
+      if confirm 'Tem certeza que quer retirar o item do carrinho?'
+        CartFacade.delete(cartItem);
 
 ]
